@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:practical_class_01/style/colors.dart';
-import 'package:practical_class_01/style/text_styles.dart';
+import 'package:practical_class_01/core/style/colors.dart';
+import 'package:practical_class_01/core/style/text_styles.dart';
 
 extension StyleExtension on BuildContext {
   Color get colorGradientBegin => Theme.of(this).extension<AppColors>()!.gradientBegin!;

@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "588525590368",
+    "project_id": "tourist-app-2024",
+    "storage_bucket": "tourist-app-2024.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:588525590368:android:8a5c379e37509c6052b005",
+        "android_client_info": {
+          "package_name": "hr.algebra.practical_class_01"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDTjpp9oPVxGKITzo77ThfTadeVGX5V6cM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
