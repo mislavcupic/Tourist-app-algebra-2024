@@ -5,12 +5,12 @@ const backgroundColorLight = Color(0xFFFAFDFF);
 const errorColorLight = Color(0xFFFF2D2D);
 const gradientBeginColorLight = Color(0xFFD17438);
 const gradientEndColorLight = Color(0xFF9D2C56);
-const ternaryColorLight = Color(0xFFAFB1B2);
+const borderColorLight = Color(0xFFAFB1B2);
 
 class AppColors extends ThemeExtension<AppColors> {
   final Color? text;
   final Color? background;
-  final Color? ternary;
+  final Color? border;
   final Color? error;
   final Color? gradientBegin;
   final Color? gradientEnd;
@@ -18,7 +18,7 @@ class AppColors extends ThemeExtension<AppColors> {
   const AppColors({
     required this.text,
     required this.background,
-    required this.ternary,
+    required this.border,
     required this.error,
     required this.gradientBegin,
     required this.gradientEnd,
@@ -28,7 +28,7 @@ class AppColors extends ThemeExtension<AppColors> {
   AppColors copyWith({
     final Color? text,
     final Color? background,
-    final Color? ternary,
+    final Color? border,
     final Color? error,
     final Color? gradientBegin,
     final Color? gradientEnd,
@@ -36,7 +36,7 @@ class AppColors extends ThemeExtension<AppColors> {
       AppColors(
         text: text ?? this.text,
         background: background ?? this.background,
-        ternary: ternary ?? this.ternary,
+        border: border ?? this.border,
         error: error ?? this.error,
         gradientBegin: gradientBegin ?? this.gradientBegin,
         gradientEnd: gradientEnd ?? this.gradientEnd,
@@ -51,7 +51,7 @@ class AppColors extends ThemeExtension<AppColors> {
     return AppColors(
       text: Color.lerp(text, other.text, t),
       background: Color.lerp(background, other.background, t),
-      ternary: Color.lerp(ternary, other.ternary, t),
+      border: Color.lerp(border, other.border, t),
       error: Color.lerp(error, other.error, t),
       gradientBegin: Color.lerp(gradientBegin, other.gradientBegin, t),
       gradientEnd: Color.lerp(gradientEnd, other.gradientEnd, t),

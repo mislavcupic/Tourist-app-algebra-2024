@@ -8,7 +8,7 @@ final lightTheme = ThemeData(
     AppColors(
       text: textColorLight,
       background: backgroundColorLight,
-      ternary: ternaryColorLight,
+      border: borderColorLight,
       error: errorColorLight,
       gradientBegin: gradientBeginColorLight,
       gradientEnd: gradientEndColorLight,
