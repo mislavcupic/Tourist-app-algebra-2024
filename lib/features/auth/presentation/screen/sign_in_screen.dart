@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:practical_class_01/core/app_route.dart';
 import 'package:practical_class_01/core/di.dart';
 import 'package:practical_class_01/core/style/style_extensions.dart';
 import 'package:practical_class_01/features/auth/presentation/controller/state/auth_state.dart';
@@ -31,14 +32,16 @@ class _SignInScreenState extends ConsumerState<SignInScreen> {
           case AuthenticatedState():
             print("SUCCESS!");
             isLoading.value = false;
-          //Navigator.of(context).pushReplacementNamed();
+            Navigator.of(context).pushReplacementNamed(AppRoute.home);
+
           case LoadingState():
             print("LOADING!");
             isLoading.value = true;
-          case UnauthenticatedState():
-            print("ERROR!");
+
+          case UnauthenticatedState(failure: var failure):
             isLoading.value = false;
-          //show dialog
+            final snackBar = SnackBar(content: Text(failure!.message));
+            ScaffoldMessenger.of(context).showSnackBar(snackBar);
         }
       });
     });
@@ -72,6 +75,7 @@ class _SignInScreenState extends ConsumerState<SignInScreen> {
                     label: "Password",
                     controller: passwordController,
                     validator: _validatePassword,
+                    isPassword: true,
                   ),
                   const SizedBox(height: 5),
                   const Align(
@@ -106,12 +110,12 @@ class _SignInScreenState extends ConsumerState<SignInScreen> {
 
   String? _validateEmail(String? value) {
     final regex = RegExp(r"(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'"
-    r'*+/=?^_`{|}~-]+)*|"(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21\x23-\x5b\x5d-'
-    r'\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])*")@(?:(?:[a-z0-9](?:[a-z0-9-]*'
-    r'[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|\[(?:(?:(2(5[0-5]|[0-4]'
-    r'[0-9])|1[0-9][0-9]|[1-9]?[0-9]))\.){3}(?:(2(5[0-5]|[0-4][0-9])|1[0-9]'
-    r'[0-9]|[1-9]?[0-9])|[a-z0-9-]*[a-z0-9]:(?:[\x01-\x08\x0b\x0c\x0e-\x1f\'
-    r'x21-\x5a\x53-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])+)\])');
+        r'*+/=?^_`{|}~-]+)*|"(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21\x23-\x5b\x5d-'
+        r'\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])*")@(?:(?:[a-z0-9](?:[a-z0-9-]*'
+        r'[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|\[(?:(?:(2(5[0-5]|[0-4]'
+        r'[0-9])|1[0-9][0-9]|[1-9]?[0-9]))\.){3}(?:(2(5[0-5]|[0-4][0-9])|1[0-9]'
+        r'[0-9]|[1-9]?[0-9])|[a-z0-9-]*[a-z0-9]:(?:[\x01-\x08\x0b\x0c\x0e-\x1f\'
+        r'x21-\x5a\x53-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])+)\])');
 
     if (value == null || value.isEmpty) {
       return "Field must not be empty.";
