@@ -14,6 +14,8 @@ class LocationListController extends Notifier<LocationListState> {
   }
 
   void getAllLocations() async {
+    state = LoadingState();
+
     final result = await _useCase();
     result.fold(
       (failure) => state = ErrorState(failure),
