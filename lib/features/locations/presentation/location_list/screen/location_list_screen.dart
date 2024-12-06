@@ -20,16 +20,19 @@ class LocationListScreen extends ConsumerWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text("Places", style: context.textTitle),
+          const SizedBox(height: 20),
           switch (state) {
             LoadingState() => Expanded(
-                child: Center(child: Lottie.asset('assets/animations/loading_sights.json', height: 50)),
+                child: Center(
+                  child: Lottie.asset('assets/animations/loading_sights.json', height: 50),
+                ),
               ),
             EmptyState() => Expanded(child: EmptyStateWidget()),
-            ErrorState(failure: var failure) => ErrorStateWidget(failure),
+            ErrorState(failure: var failure) => Expanded(child: ErrorStateWidget(failure)),
             FilledState(locations: var list) => Expanded(
                 child: ListView.separated(
                   itemCount: list.length,
-                  separatorBuilder: (_, __) => const SizedBox(height: 10),
+                  separatorBuilder: (_, __) => const SizedBox(height: 15),
                   itemBuilder: (context, index) => LocationCard(list[index]),
                 ),
               ),

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:practical_class_01/core/error/failure.dart';
+import 'package:practical_class_01/core/style/style_extensions.dart';
 
 class ErrorStateWidget extends StatelessWidget {
   final Failure failure;
@@ -8,6 +9,17 @@ class ErrorStateWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Text(failure.message);
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        Image.asset('assets/images/error_image.png'),
+        Text(failure.message, style: context.textSubtitle),
+        const SizedBox(height: 10),
+        Text(
+          'Please try again later or check your internet connection.',
+          textAlign: TextAlign.center,
+        )
+      ],
+    );
   }
 }
