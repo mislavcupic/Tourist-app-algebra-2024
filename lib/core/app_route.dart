@@ -7,10 +7,10 @@ import 'package:practical_class_01/features/locations/presentation/location_deta
 class AppRoute {
   AppRoute._();
 
-  static const splash = '/splash';
+  static const splash = '/';
   static const signIn = '/signIn';
   static const home = '/home';
-  static const details = '/';
+  static const details = '/details';
 
   static Route<dynamic> generateRoute(final RouteSettings settings) {
     switch (settings.name) {
