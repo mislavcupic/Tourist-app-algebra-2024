@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:practical_class_01/features/locations/presentation/favorite_list/screen/favorite_list_screen.dart';
 import 'package:practical_class_01/features/locations/presentation/location_list/screen/location_list_screen.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -13,7 +14,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
   final _screens = [
     LocationListScreen(),
-    Text('Favorite list'),
+    FavoriteListScreen(),
     Text('Profile'),
   ];
 

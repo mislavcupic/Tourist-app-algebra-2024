@@ -1,17 +1,18 @@
 import 'package:flutter/material.dart';
-import 'package:practical_class_01/core/app_route.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:practical_class_01/core/di.dart';
 import 'package:practical_class_01/core/style/style_extensions.dart';
 import 'package:practical_class_01/features/locations/domain/model/location.dart';
 import 'package:practical_class_01/features/locations/presentation/location_detail/screen/location_detail_screen.dart';
 import 'package:practical_class_01/features/locations/presentation/widget/star_rating.dart';
 
-class LocationCard extends StatelessWidget {
+class LocationCard extends ConsumerWidget {
   final Location location;
 
   const LocationCard(this.location, {super.key});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     return GestureDetector(
       onTap: () => Navigator.of(context).push(
         MaterialPageRoute(
@@ -57,7 +58,7 @@ class LocationCard extends StatelessWidget {
               ),
             ),
             GestureDetector(
-              onTap: () => print("FAV pressed!"),
+              onTap: () => ref.read(favoriteListNotifier.notifier).setAsFavorite(location),
               child: Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: Icon(Icons.favorite, color: Colors.white),

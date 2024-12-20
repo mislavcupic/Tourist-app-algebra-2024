@@ -1,6 +1,6 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:practical_class_01/core/di.dart';
-import 'package:practical_class_01/features/locations/domain/usecase/GetAllLocationsUseCase.dart';
+import 'package:practical_class_01/features/locations/domain/usecase/get_all_locations_use_case.dart';
 import 'package:practical_class_01/features/locations/presentation/location_list/controller/state/location_list_state.dart';
 
 class LocationListController extends Notifier<LocationListState> {
