@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:practical_class_01/core/style/colors.dart';
+import 'package:tourist_project_mc/core/style/colors.dart';
 
 final lightTheme = ThemeData(
   fontFamily: 'Montserrat',

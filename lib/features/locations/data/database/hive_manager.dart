@@ -1,6 +1,6 @@
 import 'package:hive_flutter/hive_flutter.dart';
-import 'package:practical_class_01/features/locations/data/database/database_manager.dart';
-import 'package:practical_class_01/features/locations/domain/model/location.dart';
+import 'package:tourist_project_mc/features/locations/data/database/database_manager.dart';
+import 'package:tourist_project_mc/features/locations/domain/model/location.dart';
 
 class HiveDatabaseManager implements DatabaseManager {
   static const boxName = 'locations';

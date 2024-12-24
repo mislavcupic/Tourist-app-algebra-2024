@@ -1,10 +1,10 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:practical_class_01/core/di.dart';
-import 'package:practical_class_01/features/locations/domain/model/location.dart';
-import 'package:practical_class_01/features/locations/domain/usecase/get_favorite_locations_use_case.dart';
-import 'package:practical_class_01/features/locations/domain/usecase/remove_location_as_favorite_use_case.dart';
-import 'package:practical_class_01/features/locations/domain/usecase/set_location_as_favorite_use_case.dart';
-import 'package:practical_class_01/features/locations/presentation/favorite_list/controller/state/favorite_list_state.dart';
+import 'package:tourist_project_mc/core/di.dart';
+import 'package:tourist_project_mc/features/locations/domain/model/location.dart';
+import 'package:tourist_project_mc/features/locations/domain/usecase/get_favorite_locations_use_case.dart';
+import 'package:tourist_project_mc/features/locations/domain/usecase/remove_location_as_favorite_use_case.dart';
+import 'package:tourist_project_mc/features/locations/domain/usecase/set_location_as_favorite_use_case.dart';
+import 'package:tourist_project_mc/features/locations/presentation/favorite_list/controller/state/favorite_list_state.dart';
 
 class FavoriteListController extends Notifier<FavoriteListState> {
   late final GetAllFavoriteLocationsUseCase _getFavoriteList;

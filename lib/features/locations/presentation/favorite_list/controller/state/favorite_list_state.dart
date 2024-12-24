@@ -1,4 +1,4 @@
-import 'package:practical_class_01/features/locations/domain/model/location.dart';
+import 'package:tourist_project_mc/features/locations/domain/model/location.dart';
 
 sealed class FavoriteListState {}
 

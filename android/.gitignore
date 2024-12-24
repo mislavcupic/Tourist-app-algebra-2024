@@ -11,3 +11,19 @@ GeneratedPluginRegistrant.java
 key.properties
 **/*.keystore
 **/*.jks
+
+
+#naknadno dodano do kraja
+# Firebase related
+android/app/google-services.json
+ios/Runner/GoogleService-Info.plist
+
+# Local build artifacts
+**/build/
+
+# Temporary files created by the IDE
+*.tmp
+*.temp
+*.orig
+*.bak
+*.swp

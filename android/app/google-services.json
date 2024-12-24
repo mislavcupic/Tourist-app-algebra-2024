@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "657371782183",
+    "project_id": "tourist-app-2024-c3048",
+    "storage_bucket": "tourist-app-2024-c3048.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:657371782183:android:349c319a0dc91ecfe18202",
+        "android_client_info": {
+          "package_name": "hr.algebra.tourist.project.mc"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD8dO-07O2vMURfZwLT7lq_mPO_ANoR4EI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

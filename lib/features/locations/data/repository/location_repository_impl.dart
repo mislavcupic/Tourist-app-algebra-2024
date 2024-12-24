@@ -1,9 +1,9 @@
 import 'package:dartz/dartz.dart';
-import 'package:practical_class_01/core/error/failure.dart';
-import 'package:practical_class_01/features/locations/data/api/location_api.dart';
-import 'package:practical_class_01/features/locations/data/database/database_manager.dart';
-import 'package:practical_class_01/features/locations/domain/model/location.dart';
-import 'package:practical_class_01/features/locations/domain/repository/location_repository.dart';
+import 'package:tourist_project_mc/core/error/failure.dart';
+import 'package:tourist_project_mc/features/locations/data/api/location_api.dart';
+import 'package:tourist_project_mc/features/locations/data/database/database_manager.dart';
+import 'package:tourist_project_mc/features/locations/domain/model/location.dart';
+import 'package:tourist_project_mc/features/locations/domain/repository/location_repository.dart';
 
 class LocationRepositoryImpl implements LocationRepository {
   final LocationApi _locationApi;

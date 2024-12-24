@@ -1,5 +1,5 @@
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:practical_class_01/core/error/failure.dart';
+import 'package:tourist_project_mc/core/error/failure.dart';
 
 sealed class AuthState {}
 

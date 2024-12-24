@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:practical_class_01/core/app_route.dart';
-import 'package:practical_class_01/core/di.dart';
-import 'package:practical_class_01/core/style/style_extensions.dart';
-import 'package:practical_class_01/features/auth/presentation/controller/state/auth_state.dart';
-import 'package:practical_class_01/features/common/presentation/widget/custom_primary_button.dart';
-import 'package:practical_class_01/features/auth/presentation/widget/custom_text_field.dart';
+import 'package:tourist_project_mc/core/app_route.dart';
+import 'package:tourist_project_mc/core/di.dart';
+import 'package:tourist_project_mc/core/style/style_extensions.dart';
+import 'package:tourist_project_mc/features/auth/presentation/controller/state/auth_state.dart';
+import 'package:tourist_project_mc/features/common/presentation/widget/custom_primary_button.dart';
+import 'package:tourist_project_mc/features/auth/presentation/widget/custom_text_field.dart';
 
 class SignInScreen extends StatefulHookConsumerWidget {
   const SignInScreen({super.key});

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:practical_class_01/features/locations/presentation/favorite_list/screen/favorite_list_screen.dart';
-import 'package:practical_class_01/features/locations/presentation/location_list/screen/location_list_screen.dart';
+import 'package:tourist_project_mc/features/locations/presentation/favorite_list/screen/favorite_list_screen.dart';
+import 'package:tourist_project_mc/features/locations/presentation/location_list/screen/location_list_screen.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});

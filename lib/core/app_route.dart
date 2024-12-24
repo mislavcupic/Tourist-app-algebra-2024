@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:practical_class_01/features/auth/presentation/screen/sign_in_screen.dart';
-import 'package:practical_class_01/features/common/presentation/screen/home_screen.dart';
-import 'package:practical_class_01/features/initialisation/presentation/screen/splash_screen.dart';
-import 'package:practical_class_01/features/locations/presentation/location_detail/screen/location_detail_screen.dart';
+import 'package:tourist_project_mc/features/auth/presentation/screen/sign_in_screen.dart';
+import 'package:tourist_project_mc/features/common/presentation/screen/home_screen.dart';
+import 'package:tourist_project_mc/features/initialisation/presentation/screen/splash_screen.dart';
+import 'package:tourist_project_mc/features/locations/presentation/location_detail/screen/location_detail_screen.dart';
 
 class AppRoute {
   AppRoute._();

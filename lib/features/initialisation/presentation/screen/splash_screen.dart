@@ -1,7 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
-import 'package:practical_class_01/core/app_route.dart';
+import 'package:tourist_project_mc/core/app_route.dart';
 
 class SplashScreen extends StatelessWidget {
   const SplashScreen({super.key});

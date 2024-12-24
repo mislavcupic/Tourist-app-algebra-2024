@@ -1,9 +1,9 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:practical_class_01/core/app_route.dart';
-import 'package:practical_class_01/core/style/app_theme.dart';
-import 'package:practical_class_01/features/locations/data/database/hive_manager.dart';
+import 'package:tourist_project_mc/core/app_route.dart';
+import 'package:tourist_project_mc/core/style/app_theme.dart';
+import 'package:tourist_project_mc/features/locations/data/database/hive_manager.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();

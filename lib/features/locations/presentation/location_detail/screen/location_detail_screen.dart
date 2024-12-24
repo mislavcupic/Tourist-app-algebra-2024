@@ -1,10 +1,10 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
-import 'package:practical_class_01/core/style/style_extensions.dart';
-import 'package:practical_class_01/features/common/presentation/widget/custom_primary_button.dart';
-import 'package:practical_class_01/features/locations/domain/model/location.dart';
-import 'package:practical_class_01/features/locations/presentation/widget/star_rating.dart';
+import 'package:tourist_project_mc/core/style/style_extensions.dart';
+import 'package:tourist_project_mc/features/common/presentation/widget/custom_primary_button.dart';
+import 'package:tourist_project_mc/features/locations/domain/model/location.dart';
+import 'package:tourist_project_mc/features/locations/presentation/widget/star_rating.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class LocationDetailScreen extends StatelessWidget {
