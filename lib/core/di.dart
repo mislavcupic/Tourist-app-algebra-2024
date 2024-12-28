@@ -5,6 +5,7 @@ import 'package:tourist_project_mc/features/auth/data/api/user_api.dart';
 import 'package:tourist_project_mc/features/auth/data/repository/user_repository_impl.dart';
 import 'package:tourist_project_mc/features/auth/domain/repository/user_repository.dart';
 import 'package:tourist_project_mc/features/auth/domain/usecase/sign_in_use_case.dart';
+import 'package:tourist_project_mc/features/auth/domain/usecase/sign_up_use_case.dart';
 import 'package:tourist_project_mc/features/auth/presentation/controller/auth_controller.dart';
 import 'package:tourist_project_mc/features/auth/presentation/controller/state/auth_state.dart';
 import 'package:tourist_project_mc/features/locations/data/api/location_api.dart';
@@ -41,7 +42,7 @@ final locationRepositoryProvider = Provider<LocationRepository>(
 
 //******** USE CASE ********//
 final signInUseCaseProvider = Provider<SignInUseCase>((ref) => SignInUseCase(ref.watch(userRepositoryProvider)));
-
+final signUpUseCaseProvider = Provider<SignUpUseCase>((ref) => SignUpUseCase(ref.watch(userRepositoryProvider)));
 final getAllLocationsUseCaseProvider = Provider<GetAllLocationsUseCase>(
   (ref) => GetAllLocationsUseCase(ref.watch(locationRepositoryProvider)),
 );

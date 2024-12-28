@@ -16,3 +16,9 @@ class UnauthenticatedState extends AuthState {
 
   UnauthenticatedState({this.failure = null});
 }
+class EmailVerificationState extends AuthState {
+  final User user;
+
+  EmailVerificationState(this.user);
+}
+

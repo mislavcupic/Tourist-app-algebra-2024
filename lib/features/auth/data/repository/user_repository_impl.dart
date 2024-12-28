@@ -23,4 +23,25 @@ class UserRepositoryImpl implements UserRepository {
       return Left(NetworkFailure("Network error. Please try again."));
     }
   }
+
+  @override
+  Future<Either<Failure, User?>> signUp (String email, String password) async {
+    try {
+      final user = await _userApi.signUp(email, password);
+      print("Repository: User received: ${user?.email}");
+      return Right(user);
+    } on FirebaseAuthException catch (e) {
+      // Obrada specifičnih grešaka za FirebaseAuth
+      if (e.code == 'email-already-in-use') {
+        return Left(FirebaseAuthFailure("The email is already in use. Please use a different email."));
+      } else if (e.code == 'weak-password') {
+        return Left(FirebaseAuthFailure("The password is too weak. Please choose a stronger password."));
+      }
+      return Left(FirebaseAuthFailure("An error occurred during registration. Please try again."));
+    } catch (e) {
+      // Obrada općenitih grešaka (npr. mrežnih problema)
+      return Left(NetworkFailure("Network error. Please try again."));
+
+    }
+  }
 }

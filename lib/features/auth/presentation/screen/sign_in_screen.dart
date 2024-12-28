@@ -1,3 +1,4 @@
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -5,6 +6,7 @@ import 'package:tourist_project_mc/core/app_route.dart';
 import 'package:tourist_project_mc/core/di.dart';
 import 'package:tourist_project_mc/core/style/style_extensions.dart';
 import 'package:tourist_project_mc/features/auth/presentation/controller/state/auth_state.dart';
+import 'package:tourist_project_mc/features/auth/presentation/screen/sign_up_screen.dart';
 import 'package:tourist_project_mc/features/common/presentation/widget/custom_primary_button.dart';
 import 'package:tourist_project_mc/features/auth/presentation/widget/custom_text_field.dart';
 
@@ -42,6 +44,10 @@ class _SignInScreenState extends ConsumerState<SignInScreen> {
             isLoading.value = false;
             final snackBar = SnackBar(content: Text(failure!.message));
             ScaffoldMessenger.of(context).showSnackBar(snackBar);
+
+          case EmailVerificationState():
+            //ignoraj
+            print('Ignore');
         }
       });
     });
@@ -94,10 +100,27 @@ class _SignInScreenState extends ConsumerState<SignInScreen> {
                     onPressed: () => _signIn(emailController.text, passwordController.text),
                   ),
                   const Spacer(),
-                  Text(
-                    "Don't have an account? Sign up.",
-                    style: context.textSubtitle,
-                  ), //TODO: Make this TextButton
+                  Text.rich(
+                    TextSpan(
+                      text: "Don't have an account? ",
+                      style: context.textDescription,
+                      children: [
+                        TextSpan(
+                          text: "Sign up.",
+                          style: context.textButton,
+                          recognizer: TapGestureRecognizer()
+                            ..onTap = () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => SignUpScreen(),
+                                ),
+                              );
+                            },
+                        ),
+                      ],
+                    ),
+                  ),
                   const SizedBox(height: 30),
                 ],
               ),
