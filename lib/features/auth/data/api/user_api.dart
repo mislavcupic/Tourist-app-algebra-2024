@@ -53,6 +53,26 @@ class UserApi {
       rethrow; // Ponovno pokreće grešku, tako da možete obraditi u gornjem sloju
     }
   }
+  Future<void> resendVerificationEmail() async {
+    final user = instance.currentUser;
+
+    if (user != null && !user.emailVerified) {
+      try {
+        await user.sendEmailVerification();
+        print("API: Verification email resent.");
+      } catch (e) {
+        print("API: Error resending verification email - $e");
+        rethrow; // Prosljeđuje grešku za daljnju obradu
+      }
+    } else {
+      print("API: No user signed in or email already verified.");
+      throw Exception("No user signed in or email already verified.");
+    }
+  }
 
 
+  Future<void> sendPasswordResetEmail(String email) async {
+    await instance.sendPasswordResetEmail(email: email);
+
+  }
 }

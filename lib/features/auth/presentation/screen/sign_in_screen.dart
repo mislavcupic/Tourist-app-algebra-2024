@@ -6,6 +6,7 @@ import 'package:tourist_project_mc/core/app_route.dart';
 import 'package:tourist_project_mc/core/di.dart';
 import 'package:tourist_project_mc/core/style/style_extensions.dart';
 import 'package:tourist_project_mc/features/auth/presentation/controller/state/auth_state.dart';
+import 'package:tourist_project_mc/features/auth/presentation/screen/forgot_password_screen.dart';
 import 'package:tourist_project_mc/features/auth/presentation/screen/sign_up_screen.dart';
 import 'package:tourist_project_mc/features/common/presentation/widget/custom_primary_button.dart';
 import 'package:tourist_project_mc/features/auth/presentation/widget/custom_text_field.dart';
@@ -84,14 +85,26 @@ class _SignInScreenState extends ConsumerState<SignInScreen> {
                     isPassword: true,
                   ),
                   const SizedBox(height: 5),
-                  const Align(
+                  Align(
                     alignment: Alignment.centerRight,
-                    child: Text(
-                      "Forgot password?",
-                      style: TextStyle(fontWeight: FontWeight.w600),
-                      textAlign: TextAlign.end,
+                    child: Text.rich(
+                      TextSpan(
+                            text: "Forgot password?",
+                            style: context.textButton,
+                            recognizer: TapGestureRecognizer()
+                              ..onTap = () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => ForgotPasswordScreen(),
+                                  ),
+                                );
+                              },
+                          ),
+
+                      ),
                     ),
-                  ),
+
                   const SizedBox(height: 45),
                   CustomPrimaryButton(
                     child: isLoading.value

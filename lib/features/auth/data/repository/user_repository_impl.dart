@@ -13,6 +13,12 @@ class UserRepositoryImpl implements UserRepository {
   Future<Either<Failure, User?>> signIn(String email, String password) async {
     try {
       final user = await _userApi.signIn(email, password);
+
+      // Provjera je li korisnikov email verificiran
+      if (user != null && !user.emailVerified) {
+        return Left(FirebaseAuthFailure("Please verify your email before logging in."));
+      }
+
       return Right(user);
     } on FirebaseAuthException catch (e) {
       if (e.code == 'user-not-found') {
@@ -23,7 +29,6 @@ class UserRepositoryImpl implements UserRepository {
       return Left(NetworkFailure("Network error. Please try again."));
     }
   }
-
   @override
   Future<Either<Failure, User?>> signUp (String email, String password) async {
     try {
@@ -42,6 +47,18 @@ class UserRepositoryImpl implements UserRepository {
       // Obrada općenitih grešaka (npr. mrežnih problema)
       return Left(NetworkFailure("Network error. Please try again."));
 
+    }
+  }
+
+
+  Future<Either<Failure, Unit>> sendPasswordResetEmail(String email) async {
+    try {
+      await _userApi.sendPasswordResetEmail(email);
+      return right(unit);  // "unit" is used to indicate success without returning data.
+    } on FirebaseAuthException catch (e) {
+      return left(FirebaseAuthFailure(e.message ?? "Error occurred."));
+    } catch (e) {
+      return left(NetworkFailure("Network error. Please try again."));
     }
   }
 }

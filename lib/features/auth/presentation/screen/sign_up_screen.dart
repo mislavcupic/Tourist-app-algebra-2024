@@ -1,11 +1,13 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:tourist_project_mc/core/app_route.dart';
 import 'package:tourist_project_mc/core/di.dart';
 import 'package:tourist_project_mc/core/style/style_extensions.dart';
 import 'package:tourist_project_mc/features/auth/presentation/controller/state/auth_state.dart';
+import 'package:tourist_project_mc/features/auth/presentation/screen/email_verification.dart';
 import 'package:tourist_project_mc/features/auth/presentation/screen/sign_in_screen.dart';
 import 'package:tourist_project_mc/features/common/presentation/widget/custom_primary_button.dart';
 import 'package:tourist_project_mc/features/auth/presentation/widget/custom_text_field.dart';
@@ -61,13 +63,28 @@ class _SignUpScreenState extends ConsumerState<SignUpScreen> {
       // Provjera null vrijednosti failure objekta prije nego što pristupimo 'failure.message'
       final failure = authState.failure;
       if (failure != null) {
-        final snackBar = SnackBar(content: Text(failure.message));
-        if (mounted) {
-          ScaffoldMessenger.of(context).showSnackBar(snackBar);
-        }
+        WidgetsBinding.instance.addPostFrameCallback((_) {
+          if (mounted) {
+            final snackBar = SnackBar(content: Text(failure.message));
+            ScaffoldMessenger.of(context).showSnackBar(snackBar);
+          }
+        });
+
       }
     } else if (authState is EmailVerificationState) {
       print("Email verification sent!");
+      // Navigacija na ekran za verifikaciju
+      if (mounted) {
+        SchedulerBinding.instance.addPostFrameCallback((_) {
+          Navigator.pushReplacement(
+            context,
+            MaterialPageRoute(
+              builder: (context) => EmailVerification(),
+            ),
+          );
+        });
+
+      }
     }
 
     return Scaffold(

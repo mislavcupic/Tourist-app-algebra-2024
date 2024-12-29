@@ -4,8 +4,11 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:tourist_project_mc/features/auth/data/api/user_api.dart';
 import 'package:tourist_project_mc/features/auth/data/repository/user_repository_impl.dart';
 import 'package:tourist_project_mc/features/auth/domain/repository/user_repository.dart';
+import 'package:tourist_project_mc/features/auth/domain/repository/reset_password_repository.dart';
+import 'package:tourist_project_mc/features/auth/data/repository/reset_password_repository_impl.dart';
 import 'package:tourist_project_mc/features/auth/domain/usecase/sign_in_use_case.dart';
 import 'package:tourist_project_mc/features/auth/domain/usecase/sign_up_use_case.dart';
+import 'package:tourist_project_mc/features/auth/domain/usecase/reset_password_use_case.dart';
 import 'package:tourist_project_mc/features/auth/presentation/controller/auth_controller.dart';
 import 'package:tourist_project_mc/features/auth/presentation/controller/state/auth_state.dart';
 import 'package:tourist_project_mc/features/locations/data/api/location_api.dart';
@@ -31,6 +34,7 @@ final locationApiProvider = Provider<LocationApi>((ref) => LocationApi(Dio()));
 final databaseMangerProvider = Provider<DatabaseManager>((ref) => HiveDatabaseManager());
 
 //******** REPOSITORY ********//
+final resetPasswordRepositoryProvider = Provider<ResetPasswordRepository>((ref) => ResetPasswordRepositoryImpl(ref.watch(userApiProvider)));
 final userRepositoryProvider = Provider<UserRepository>((ref) => UserRepositoryImpl(ref.watch(userApiProvider)));
 
 final locationRepositoryProvider = Provider<LocationRepository>(
@@ -41,6 +45,7 @@ final locationRepositoryProvider = Provider<LocationRepository>(
 );
 
 //******** USE CASE ********//
+final resetPasswordUseCase = Provider<ResetPasswordUseCase>((ref) => ResetPasswordUseCase(ref.watch(resetPasswordRepositoryProvider)));
 final signInUseCaseProvider = Provider<SignInUseCase>((ref) => SignInUseCase(ref.watch(userRepositoryProvider)));
 final signUpUseCaseProvider = Provider<SignUpUseCase>((ref) => SignUpUseCase(ref.watch(userRepositoryProvider)));
 final getAllLocationsUseCaseProvider = Provider<GetAllLocationsUseCase>(

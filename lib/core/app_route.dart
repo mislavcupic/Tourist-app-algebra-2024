@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:tourist_project_mc/features/auth/presentation/screen/email_verification.dart';
 import 'package:tourist_project_mc/features/auth/presentation/screen/sign_in_screen.dart';
 import 'package:tourist_project_mc/features/common/presentation/screen/home_screen.dart';
 import 'package:tourist_project_mc/features/initialisation/presentation/screen/splash_screen.dart';
@@ -11,6 +12,7 @@ class AppRoute {
   static const signIn = '/signIn';
   static const home = '/home';
   static const details = '/details';
+  static const verification = '/verification';
 
   static Route<dynamic> generateRoute(final RouteSettings settings) {
     switch (settings.name) {
@@ -22,6 +24,8 @@ class AppRoute {
         return MaterialPageRoute(builder: (_) => const HomeScreen());
       case details:
         return MaterialPageRoute(builder: (_) => const LocationDetailScreen());
+      case verification:
+        return MaterialPageRoute(builder: (_) => const EmailVerification());
       default:
         throw Exception("Route not found...");
     }
