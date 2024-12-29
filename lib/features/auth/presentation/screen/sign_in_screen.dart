@@ -48,7 +48,7 @@ class _SignInScreenState extends ConsumerState<SignInScreen> {
 
           case EmailVerificationState():
             //ignoraj
-            print('Ignore');
+
         }
       });
     });
