@@ -1,8 +1,11 @@
+import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:tourist_project_mc/core/di.dart';
 import 'package:tourist_project_mc/features/auth/domain/usecase/sign_in_use_case.dart';
 import 'package:tourist_project_mc/features/auth/presentation/controller/state/auth_state.dart';
+import '../../../../core/app_route.dart';
 import '../../../../core/error/failure.dart';
+import '../../../../main.dart';
 import '../../domain/usecase/sign_up_use_case.dart';
 
 class AuthController extends Notifier<AuthState> {
@@ -46,11 +49,15 @@ class AuthController extends Notifier<AuthState> {
           (user) {
         if (user != null) {
           state = EmailVerificationState(user);
-        } else {
+        }
+        else {
           state = UnauthenticatedState(
               failure: failure);
         }
       },
     );
   }
+
+
+
 }

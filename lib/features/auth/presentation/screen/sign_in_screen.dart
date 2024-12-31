@@ -48,6 +48,8 @@ class _SignInScreenState extends ConsumerState<SignInScreen> {
 
           case EmailVerificationState():
             //ignoraj
+          case AccountDeactivatedState():
+            //ignoriraj
 
         }
       });

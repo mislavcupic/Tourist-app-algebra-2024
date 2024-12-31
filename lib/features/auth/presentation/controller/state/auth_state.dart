@@ -22,3 +22,6 @@ class EmailVerificationState extends AuthState {
   EmailVerificationState(this.user);
 }
 
+class AccountDeactivatedState extends AuthState {}
+
+

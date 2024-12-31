@@ -2,40 +2,103 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:tourist_project_mc/core/di.dart';
+import 'package:tourist_project_mc/features/auth/presentation/screen/sign_in_screen.dart';
+import 'package:tourist_project_mc/features/auth/presentation/screen/sign_up_screen.dart';
+import '../../../../core/app_route.dart';
 import '../../../common/presentation/widget/custom_primary_button.dart';
+import '../controller/state/auth_state.dart';
 
 class ProfileScreen extends ConsumerWidget {
   const ProfileScreen({Key? key}) : super(key: key);
 
+  // Funkcija za brisanje naloga
   Future<void> _handleDeleteAccount(BuildContext context, WidgetRef ref) async {
     final deleteUseCase = ref.read(deleteAccountUseCase);
     final result = await deleteUseCase();
+
     result.fold(
-          (failure) => ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text("Failed to delete account: ${failure.message}")),
-      ),
-          (success) => ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text("Account deleted successfully.")),
-      ),
+          (failure) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text("Failed to delete account: ${failure.message}")),
+        );
+      },
+          (success) async {
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(content: Text("Account deleted successfully.")),
+        );
+
+        // Dodavanje odlaganja pre navigacije
+        await Future.delayed(Duration(milliseconds: 500));
+
+        // Provera da li je korisnik uspešno deaktiviran i navigacija ka signUp
+        Navigator.pushNamedAndRemoveUntil(
+          context,
+          AppRoute.signUp,
+              (route) => false, // Uklanja sve prethodne ekrane
+        );
+      },
     );
   }
 
+  // Funkcija za odjavu
   Future<void> _handleSignOut(BuildContext context, WidgetRef ref) async {
     final signOut = ref.read(signOutUseCase);
     final result = await signOut();
+
     result.fold(
-          (failure) => ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text("Failed to sign out: ${failure.message}")),
-      ),
-          (success) => ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text("Signed out successfully.")),
-      ),
+          (failure) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text("Failed to sign out: ${failure.message}")),
+        );
+      },
+          (success) async {
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(content: Text("Signed out successfully.")),
+        );
+
+        // Dodavanje odlaganja pre navigacije
+        await Future.delayed(Duration(milliseconds: 500));
+
+        // Provera da li je korisnik uspešno odjavljen i navigacija ka signIn
+        Navigator.pushNamedAndRemoveUntil(
+          context,
+          AppRoute.signIn,
+              (route) => false, // Uklanja sve prethodne ekrane
+        );
+      },
     );
+  }
+
+  // Funkcija koja proverava korisnički status pre nego što se korisnik preusmeri
+  void _checkUserStatus(BuildContext context, WidgetRef ref) {
+    final authState = ref.watch(authNotifier);
+
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      final currentRoute = ModalRoute.of(context)?.settings.name;
+
+      // Ako je korisnik nedovoljno autentifikovan (deaktiviran), preusmeri ga na signUp ekran
+      if (authState is UnauthenticatedState && currentRoute != AppRoute.signIn) {
+        Navigator.pushNamedAndRemoveUntil(
+          context,
+          AppRoute.signIn,
+              (route) => false, // Uklanja sve prethodne ekrane
+        );
+      } else if (authState is AccountDeactivatedState && currentRoute != AppRoute.signUp) {
+        Navigator.pushNamedAndRemoveUntil(
+          context,
+          AppRoute.signUp,
+              (route) => false, // Uklanja sve prethodne ekrane
+        );
+      }
+    });
   }
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final user = FirebaseAuth.instance.currentUser;
+
+    // Proveravamo korisnički status pri učitavanju stranice
+    _checkUserStatus(context, ref);
 
     return Scaffold(
       appBar: AppBar(
@@ -98,3 +161,4 @@ class ProfileScreen extends ConsumerWidget {
     );
   }
 }
+
