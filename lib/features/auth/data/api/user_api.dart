@@ -86,7 +86,7 @@ class UserApi {
       User? user = instance.currentUser;
 
       if (user != null) {
-        await user.delete();
+        await user.delete(); // Brisanje naloga
         print("User account deleted successfully.");
       } else {
         print("No user is signed in.");
@@ -94,12 +94,14 @@ class UserApi {
     } on FirebaseAuthException catch (e) {
       if (e.code == 'requires-recent-login') {
         print("The user must reauthenticate before this operation can be executed.");
-        // Re-authenticate the user here.
+        // Ignorisanje reautentifikacije za sada.
       } else {
         print("Error deleting user account: ${e.message}");
       }
+      throw e; // I dalje vraćamo grešku za viši sloj, ako treba.
     }
   }
+
 
   Future<void> reauthenticate(String email, String password) async {
     try {
