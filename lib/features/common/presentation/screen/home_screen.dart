@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:tourist_project_mc/features/auth/presentation/screen/profile_screen.dart';
 import 'package:tourist_project_mc/features/locations/presentation/favorite_list/screen/favorite_list_screen.dart';
 import 'package:tourist_project_mc/features/locations/presentation/location_list/screen/location_list_screen.dart';
 
@@ -15,7 +16,7 @@ class _HomeScreenState extends State<HomeScreen> {
   final _screens = [
     LocationListScreen(),
     FavoriteListScreen(),
-    Text('Profile'),
+    ProfileScreen(),
   ];
 
   @override

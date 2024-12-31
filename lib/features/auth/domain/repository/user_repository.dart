@@ -9,4 +9,12 @@ abstract interface class UserRepository {
   //signUp
   Future<Either<Failure, User?>> signUp(String email,String password);
 
+ //signout
+  Future<Either<Failure,Unit>> signOut();
+
+  //delete account
+  Future<Either<Failure,Unit>> deactivate();
+
+  //reauthenticate
+  Future<Either<Failure,Unit>> reauthenticate(String email,String password);
 }

@@ -17,7 +17,17 @@ class ResetPasswordRepositoryImpl implements ResetPasswordRepository {
       await _userApi.sendPasswordResetEmail(email);
       return const Right(unit);
     } catch (e) {
-      return Left(AppError(message: e.toString())); // Zamjena Failure s AppError
+      return left(AppError(message: e.toString())); // Zamjena Failure s AppError
+    }
+  }
+  //reset password
+  @override
+  Future<Either<AppError, Unit>> resendEmail(String email) async {
+    try {
+      await _userApi.sendPasswordResetEmail(email);
+      return right(unit);  // "unit" is used to indicate success without returning data.
+    } on AppError catch (e) {
+      return left(AppError(message: e.toString()));
     }
   }
 }

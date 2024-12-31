@@ -6,7 +6,11 @@ import 'package:tourist_project_mc/features/auth/data/repository/user_repository
 import 'package:tourist_project_mc/features/auth/domain/repository/user_repository.dart';
 import 'package:tourist_project_mc/features/auth/domain/repository/reset_password_repository.dart';
 import 'package:tourist_project_mc/features/auth/data/repository/reset_password_repository_impl.dart';
+import 'package:tourist_project_mc/features/auth/domain/usecase/delete_account_use_case.dart';
+import 'package:tourist_project_mc/features/auth/domain/usecase/reauthentication_use_case.dart';
+import 'package:tourist_project_mc/features/auth/domain/usecase/resend_email_use_case.dart';
 import 'package:tourist_project_mc/features/auth/domain/usecase/sign_in_use_case.dart';
+import 'package:tourist_project_mc/features/auth/domain/usecase/sign_out_use_case.dart';
 import 'package:tourist_project_mc/features/auth/domain/usecase/sign_up_use_case.dart';
 import 'package:tourist_project_mc/features/auth/domain/usecase/reset_password_use_case.dart';
 import 'package:tourist_project_mc/features/auth/presentation/controller/auth_controller.dart';
@@ -35,6 +39,7 @@ final databaseMangerProvider = Provider<DatabaseManager>((ref) => HiveDatabaseMa
 
 //******** REPOSITORY ********//
 final resetPasswordRepositoryProvider = Provider<ResetPasswordRepository>((ref) => ResetPasswordRepositoryImpl(ref.watch(userApiProvider)));
+final resendEmailRepositoryProvider = Provider<ResetPasswordRepository>((ref) => ResetPasswordRepositoryImpl(ref.watch(userApiProvider)));
 final userRepositoryProvider = Provider<UserRepository>((ref) => UserRepositoryImpl(ref.watch(userApiProvider)));
 
 final locationRepositoryProvider = Provider<LocationRepository>(
@@ -45,6 +50,10 @@ final locationRepositoryProvider = Provider<LocationRepository>(
 );
 
 //******** USE CASE ********//
+final signOutUseCase = Provider<SignOutUseCase>((ref) => SignOutUseCase(ref.watch(userRepositoryProvider)));
+final reauthenticationUseCase = Provider<ReauthenticationUseCase>((ref) => ReauthenticationUseCase(ref.watch(userRepositoryProvider)));
+final deleteAccountUseCase = Provider<DeleteAccountUseCase>((ref) => DeleteAccountUseCase(ref.watch(userRepositoryProvider)));
+final resendEmailUseCase = Provider<ResendEmailUseCase>((ref) => ResendEmailUseCase(ref.watch(resendEmailRepositoryProvider)));
 final resetPasswordUseCase = Provider<ResetPasswordUseCase>((ref) => ResetPasswordUseCase(ref.watch(resetPasswordRepositoryProvider)));
 final signInUseCaseProvider = Provider<SignInUseCase>((ref) => SignInUseCase(ref.watch(userRepositoryProvider)));
 final signUpUseCaseProvider = Provider<SignUpUseCase>((ref) => SignUpUseCase(ref.watch(userRepositoryProvider)));

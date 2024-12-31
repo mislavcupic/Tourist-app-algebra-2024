@@ -5,4 +5,5 @@ import 'package:tourist_project_mc/core/error/app_error.dart'; // Provjerite da 
 
 abstract interface class ResetPasswordRepository {
   Future<Either<AppError, Unit>> resetPassword(String email);
+  Future<Either<AppError, Unit>> resendEmail(String email);
 }

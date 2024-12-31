@@ -72,20 +72,14 @@ class ForgotPasswordScreen extends ConsumerWidget {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               const SizedBox(height: 70),
-              // Slika (npr. ikona resetiranja lozinke)
               Image.asset("assets/images/reset_password_email.png", width: 250),
-
               const SizedBox(height: 40),
-
-              // Tekst
               Text(
                 "Please enter your email address to reset your password.",
                 style: context.textSubtitle,
                 textAlign: TextAlign.center,
               ),
-
               const SizedBox(height: 50),
-
               // Unos email adrese
               CustomTextField(
                 label: "Email",
@@ -95,7 +89,7 @@ class ForgotPasswordScreen extends ConsumerWidget {
 
               const SizedBox(height: 20),
 
-              // Dugme za resetiranje lozinke
+              // custombutton za resetiranje lozinke
               CustomPrimaryButton(
                 onPressed: isLoading
                     ? () {} // Prazna funkcija kada je učitavanje aktivno

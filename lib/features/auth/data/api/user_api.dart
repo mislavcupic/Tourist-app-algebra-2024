@@ -75,4 +75,53 @@ class UserApi {
     await instance.sendPasswordResetEmail(email: email);
 
   }
+
+  Future<void> signOut() async {
+    await instance.signOut();
+  }
+
+
+  Future<void> deactivate() async {
+    try {
+      User? user = instance.currentUser;
+
+      if (user != null) {
+        await user.delete();
+        print("User account deleted successfully.");
+      } else {
+        print("No user is signed in.");
+      }
+    } on FirebaseAuthException catch (e) {
+      if (e.code == 'requires-recent-login') {
+        print("The user must reauthenticate before this operation can be executed.");
+        // Re-authenticate the user here.
+      } else {
+        print("Error deleting user account: ${e.message}");
+      }
+    }
+  }
+
+  Future<void> reauthenticate(String email, String password) async {
+    try {
+      User? user = instance.currentUser;
+
+      if (user != null) {
+        AuthCredential credential = EmailAuthProvider.credential(
+          email: email,
+          password: password,
+        );
+
+        // Reauthenticate the user
+        await user.reauthenticateWithCredential(credential);
+        print("User re-authenticated successfully.");
+      } else {
+        print("No user is signed in for re-authentication.");
+      }
+    } on FirebaseAuthException catch (e) {
+      print("Error during re-authentication: ${e.message}");
+      throw e; // Re-throw for handling in higher layers.
+    }
+  }
 }
+
+
