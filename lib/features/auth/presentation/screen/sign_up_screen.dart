@@ -165,17 +165,21 @@ class _SignUpScreenState extends ConsumerState<SignUpScreen> {
                   Text.rich(
                     TextSpan(
                       text: "Already have an account? ",
-                      style: context.textDescription,
+                      style: context.textDescription.copyWith(
+                        color: Theme.of(context).colorScheme.onPrimary, // Osigurava vidljivost
+                      ),
                       children: [
                         TextSpan(
                           text: "Sign in.",
-                          style: context.textButton,
+                          style: context.textButton.copyWith(
+                            color: Theme.of(context).colorScheme.primary, // Osigurava vidljivost
+                          ),
                           recognizer: TapGestureRecognizer()
                             ..onTap = () {
                               Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                  builder: (context) => SignInScreen(),
+                                  builder: (context) => SignUpScreen(),
                                 ),
                               );
                             },

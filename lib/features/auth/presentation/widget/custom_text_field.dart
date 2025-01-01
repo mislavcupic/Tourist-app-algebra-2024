@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:tourist_project_mc/core/style/style_extensions.dart';
 
+import '../../../../core/style/colors.dart';
+
 class CustomTextField extends StatelessWidget {
   final String label;
   final TextEditingController controller;
@@ -17,46 +19,49 @@ class CustomTextField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final colors = Theme.of(context).extension<AppColors>();
+
     return TextFormField(
-      style: context.textDescription,
+      style: context.textDescription.copyWith(color: colors?.text), // Dinamička boja teksta
       controller: controller,
       autovalidateMode: AutovalidateMode.onUserInteraction,
       validator: validator,
       obscureText: isPassword,
       decoration: InputDecoration(
-        contentPadding: EdgeInsets.all(15),
+        contentPadding: const EdgeInsets.all(15),
         isDense: true,
         enabledBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(20),
           borderSide: BorderSide(
-            color: context.colorBorder,
+            color: colors?.border ?? context.colorBorder, // Dinamička boja granice
             width: 1,
           ),
         ),
         hintText: label,
+        hintStyle: TextStyle(color: colors?.text?.withOpacity(0.5)), // Dinamička boja hint teksta
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(20),
           borderSide: BorderSide(
-            color: context.colorBorder,
+            color: colors?.border ?? context.colorBorder, // Dinamička boja granice
             width: 1,
           ),
         ),
         focusedBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(20),
           borderSide: BorderSide(
-            color: context.colorBorder,
+            color: colors?.border ?? context.colorBorder, // Dinamička boja granice
             width: 1,
           ),
         ),
         errorBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(20),
           borderSide: BorderSide(
-            color: context.colorError,
+            color: colors?.error ?? context.colorError, // Dinamička boja greške
             width: 1,
           ),
         ),
       ),
     );
-
   }
 }
+

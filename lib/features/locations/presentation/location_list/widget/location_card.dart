@@ -17,7 +17,7 @@ class LocationCard extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final state = ref.watch(favoriteListNotifier);
 
-    // Provjera da li je lokacija već favorita
+
     final isFavorite = (state is FilledState && state.favorites.contains(location));
 
     return GestureDetector(

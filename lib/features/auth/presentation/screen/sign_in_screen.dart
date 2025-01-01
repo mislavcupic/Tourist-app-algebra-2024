@@ -120,11 +120,15 @@ class _SignInScreenState extends ConsumerState<SignInScreen> {
                   Text.rich(
                     TextSpan(
                       text: "Don't have an account? ",
-                      style: context.textDescription,
+                      style: context.textDescription.copyWith(
+                        color: Theme.of(context).colorScheme.onPrimary, // Osigurava vidljivost
+                      ),
                       children: [
                         TextSpan(
                           text: "Sign up.",
-                          style: context.textButton,
+                          style: context.textButton.copyWith(
+                            color: Theme.of(context).colorScheme.primary, // Osigurava vidljivost
+                          ),
                           recognizer: TapGestureRecognizer()
                             ..onTap = () {
                               Navigator.push(
@@ -144,7 +148,12 @@ class _SignInScreenState extends ConsumerState<SignInScreen> {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Text("Theme", style: context.textDescription),
+                      Text(
+                        "Theme",
+                        style: context.textDescription.copyWith(
+                          color: Theme.of(context).colorScheme.onPrimary,
+                        ),
+                      ),
                       SizedBox(width: 10),
                       GestureDetector(
                         onTap: () {
