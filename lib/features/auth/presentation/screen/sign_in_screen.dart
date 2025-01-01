@@ -140,11 +140,11 @@ class _SignInScreenState extends ConsumerState<SignInScreen> {
                   ),
                   const SizedBox(height: 30),
 
-                  // Dodavanje Toggle Button-a za tamnu/svijetlu temu
+
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Text("Theme", style: context.textDescription),
+                      Text("Theme", style: TextStyle(color: context.colorText)),
                       SizedBox(width: 10),
                       GestureDetector(
                         onTap: () {
@@ -153,7 +153,7 @@ class _SignInScreenState extends ConsumerState<SignInScreen> {
                         child: AnimatedSwitcher(
                           duration: const Duration(milliseconds: 300),
                           child: ref.watch(themeNotifierProvider) == ThemeMode.dark
-                              ? Icon(Icons.nightlight_round, key: ValueKey('dark'), size: 28)
+                              ? Icon(Icons.nightlight_round, key: ValueKey('dark'), size: 28,color: context.colorBorder,)
                               : Icon(Icons.wb_sunny, key: ValueKey('light'), size: 28),
                         ),
                       ),

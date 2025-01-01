@@ -10,13 +10,13 @@ class EmailVerification extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final authApi = ref.watch(userApiProvider); // Dependency injection for authApi
-    final isLoading = ValueNotifier(false); // Optional: To show a loading spinner
+    final authApi = ref.watch(userApiProvider);
+    final isLoading = ValueNotifier(false);
 
     Future<void> resendEmail() async {
       isLoading.value = true; // Start loading
       try {
-        await authApi.resendVerificationEmail(); // Invoke the API method
+        await authApi.resendVerificationEmail();
         if (context.mounted) {
           ScaffoldMessenger.of(context).showSnackBar(
             const SnackBar(

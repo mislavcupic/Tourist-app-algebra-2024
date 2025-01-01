@@ -20,7 +20,6 @@ class MyApp extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    // Promatramo stanje teme
     final themeMode = ref.watch(themeNotifierProvider);
 
     return MaterialApp(
