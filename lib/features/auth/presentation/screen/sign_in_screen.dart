@@ -140,11 +140,11 @@ class _SignInScreenState extends ConsumerState<SignInScreen> {
                   ),
                   const SizedBox(height: 30),
 
-
+                  // Toggle za temu
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Text("Theme", style: TextStyle(color: context.colorText)),
+                      Text("Theme", style: context.textDescription),
                       SizedBox(width: 10),
                       GestureDetector(
                         onTap: () {
