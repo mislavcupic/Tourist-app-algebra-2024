@@ -81,7 +81,7 @@ class UserRepositoryImpl implements UserRepository {
       return left(NetworkFailure("Network error. Please try again."));
     }
   }
-
+@override
   Future<Either<Failure, Unit>> reauthenticate(String email,
       String password) async {
     try {

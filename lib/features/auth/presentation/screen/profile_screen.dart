@@ -2,9 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:tourist_project_mc/core/di.dart';
+import 'package:tourist_project_mc/core/style/style_extensions.dart';
 import '../../../../core/app_route.dart';
 import '../../../common/presentation/widget/custom_primary_button.dart';
-import '../controller/state/auth_state.dart';
+
 
 class ProfileScreen extends ConsumerWidget {
   const ProfileScreen({Key? key}) : super(key: key);
@@ -55,11 +56,11 @@ class ProfileScreen extends ConsumerWidget {
 
         await Future.delayed(const Duration(milliseconds: 500)); // Kratko kašnjenje za UX
 
-        // Navigacija u post-frame callback-u
+
         WidgetsBinding.instance.addPostFrameCallback((_) {
           Navigator.pushNamedAndRemoveUntil(
             context,
-            AppRoute.signUp,
+            AppRoute.signIn,
                 (route) => false,
           );
         });
@@ -67,36 +68,10 @@ class ProfileScreen extends ConsumerWidget {
     );
   }
 
-  void _checkUserStatus(BuildContext context, WidgetRef ref) {
-    final authState = ref.watch(authNotifier);
-
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      final currentRoute = ModalRoute.of(context)?.settings.name;
-
-      if (authState is AccountDeactivatedState && currentRoute != AppRoute.signUp) {
-        Navigator.pushNamedAndRemoveUntil(
-          context,
-          AppRoute.signUp,
-              (route) => false,
-        );
-      } else if (authState is UnauthenticatedState && currentRoute != AppRoute.signIn) {
-        Navigator.pushNamedAndRemoveUntil(
-          context,
-          AppRoute.signIn,
-              (route) => false,
-        );
-      }
-    });
-  }
-
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final user = FirebaseAuth.instance.currentUser;
 
-    // Provera statusa korisnika
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      _checkUserStatus(context, ref);
-    });
 
     return Scaffold(
       appBar: AppBar(
@@ -134,14 +109,14 @@ class ProfileScreen extends ConsumerWidget {
             ),
             const SizedBox(height: 32),
             CustomPrimaryButton(
-              child: const Text('Deactivate Account'),
+              child:  Text('Deactivate Account',style: context.textButton.copyWith(color: Colors.white)),
               onPressed: () async {
                 await _handleDeleteAccount(context, ref);
               },
             ),
             const SizedBox(height: 16),
             CustomPrimaryButton(
-              child: const Text('Sign Out'),
+              child:  Text('Sign Out',style: context.textButton.copyWith(color: Colors.white)),
               onPressed: () async {
                 await _handleSignOut(context, ref);
               },

@@ -5,7 +5,7 @@ import 'package:tourist_project_mc/core/app_route.dart';
 import 'package:tourist_project_mc/core/style/app_theme.dart';
 import 'package:tourist_project_mc/features/locations/data/database/hive_manager.dart';
 
-import 'core/NavigationObserver.dart';
+import 'core/theme_notifier.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -14,16 +14,18 @@ void main() async {
   runApp(ProviderScope(child: const MyApp()));
 }
 
-class MyApp extends StatelessWidget {
+class MyApp extends ConsumerWidget {
   const MyApp({super.key});
 
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    // Promatramo stanje teme
+    final themeMode = ref.watch(themeNotifierProvider);
+
     return MaterialApp(
-      navigatorObservers: [NavigationObserver()],
       title: 'Flutter Demo',
-      theme: lightTheme,
+      theme: themeMode == ThemeMode.light ? lightTheme : darkTheme,
       debugShowCheckedModeBanner: false,
       initialRoute: AppRoute.splash,
       onGenerateRoute: AppRoute.generateRoute,

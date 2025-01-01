@@ -16,3 +16,19 @@ final lightTheme = ThemeData(
     ),
   ],
 );
+
+final darkTheme = ThemeData(
+  fontFamily: 'Montserrat',
+  scaffoldBackgroundColor: backgroundColorDark,
+  extensions: [
+    AppColors(
+      text: textColorLight,
+      background: backgroundColorDark,
+      border: borderColorDark,
+      error: errorColorDark,
+      gradientBegin: gradientBeginColorDark,
+      gradientEnd: gradientEndColorDark,
+      cardText: cardTextColorDark,
+    ),
+  ],
+);

@@ -8,6 +8,15 @@ const gradientEndColorLight = Color(0xFF9D2C56);
 const borderColorLight = Color(0xFFAFB1B2);
 const cardTextColorLight = Color(0xFFFAFDFF);
 
+//dark theme colors
+const textColorDark = Color(0xFFFFFFFF);
+const backgroundColorDark = Color(0xFF1C1C1C);
+const errorColorDark = Color(0xFFFF4D4D);
+const gradientBeginColorDark = Color(0xFF9C3A3A); // Svetlija crvena
+const gradientEndColorDark = Color(0xFF5D2B4B);
+const borderColorDark = Color(0xFF666666);
+const cardTextColorDark = Color(0xFFFFFFFF);
+
 class AppColors extends ThemeExtension<AppColors> {
   final Color? text;
   final Color? background;

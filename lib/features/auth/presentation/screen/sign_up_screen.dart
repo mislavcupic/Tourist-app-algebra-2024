@@ -48,7 +48,7 @@ class _SignUpScreenState extends ConsumerState<SignUpScreen> {
     final authState = ref.watch(authNotifier);
     final isLoading = useState(false);
 
-    // Ovdje koristimo if-else za praćenje authState, bez potrebe za switch
+
     if (authState is AuthenticatedState) {
       print("SUCCESS!");
       isLoading.value = false;
@@ -74,6 +74,7 @@ class _SignUpScreenState extends ConsumerState<SignUpScreen> {
     } else if (authState is EmailVerificationState) {
       print("Email verification sent!");
       // Navigacija na ekran za verifikaciju
+
       if (mounted) {
         SchedulerBinding.instance.addPostFrameCallback((_) {
           Navigator.pushReplacement(
@@ -85,6 +86,17 @@ class _SignUpScreenState extends ConsumerState<SignUpScreen> {
         });
 
       }
+    }
+    else if (authState is AccountDeactivatedState){
+      print('Deactivated!');
+      if (mounted) {
+
+
+          Navigator.of(context).pushReplacementNamed(AppRoute.signIn); // Provjerite 'mounted' prije navigacije
+        }
+
+
+
     }
 
     return Scaffold(
