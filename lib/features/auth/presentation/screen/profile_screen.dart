@@ -25,7 +25,7 @@ class ProfileScreen extends ConsumerWidget {
           const SnackBar(content: Text("Signed out successfully.")),
         );
 
-        await Future.delayed(const Duration(milliseconds: 500)); // Kratko kašnjenje za UX
+        await Future.delayed(const Duration(milliseconds: 200)); // Kratko kašnjenje za UX
 
         // Navigacija u post-frame callback-u
         WidgetsBinding.instance.addPostFrameCallback((_) {
@@ -54,7 +54,7 @@ class ProfileScreen extends ConsumerWidget {
           const SnackBar(content: Text("Account deleted successfully.")),
         );
 
-        await Future.delayed(const Duration(milliseconds: 500)); // Kratko kašnjenje za UX
+        await Future.delayed(const Duration(milliseconds: 200)); // Kratko kašnjenje za UX
 
 
         WidgetsBinding.instance.addPostFrameCallback((_) {

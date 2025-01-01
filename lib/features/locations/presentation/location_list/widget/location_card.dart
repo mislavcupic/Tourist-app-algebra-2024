@@ -6,6 +6,8 @@ import 'package:tourist_project_mc/features/locations/domain/model/location.dart
 import 'package:tourist_project_mc/features/locations/presentation/location_detail/screen/location_detail_screen.dart';
 import 'package:tourist_project_mc/features/locations/presentation/widget/star_rating.dart';
 
+import '../../favorite_list/controller/state/favorite_list_state.dart';
+
 class LocationCard extends ConsumerWidget {
   final Location location;
 
@@ -13,6 +15,11 @@ class LocationCard extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final state = ref.watch(favoriteListNotifier);
+
+    // Provjera da li je lokacija već favorita
+    final isFavorite = (state is FilledState && state.favorites.contains(location));
+
     return GestureDetector(
       onTap: () => Navigator.of(context).push(
         MaterialPageRoute(
@@ -58,10 +65,20 @@ class LocationCard extends ConsumerWidget {
               ),
             ),
             GestureDetector(
-              onTap: () => ref.read(favoriteListNotifier.notifier).setAsFavorite(location),
+              onTap: () {
+                // Ako je lokacija već favorit, ukloni je, inače dodaj
+                if (isFavorite) {
+                  ref.read(favoriteListNotifier.notifier).removeAsFavorite(location);
+                } else {
+                  ref.read(favoriteListNotifier.notifier).setAsFavorite(location);
+                }
+              },
               child: Padding(
                 padding: const EdgeInsets.all(8.0),
-                child: Icon(Icons.favorite, color: Colors.white),
+                child: Icon(
+                  isFavorite ? Icons.favorite : Icons.favorite_border, // Promijenjena ikona
+                  color: Colors.white,
+                ),
               ),
             ),
           ],

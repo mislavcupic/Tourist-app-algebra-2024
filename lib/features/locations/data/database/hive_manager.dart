@@ -15,7 +15,12 @@ class HiveDatabaseManager implements DatabaseManager {
   List<Location> getAllLocations() => Hive.box<Location>(boxName).values.toList();
 
   @override
-  void removeAsFavorite(Location location) => Hive.box<Location>(boxName).delete(location.id);
+  void removeAsFavorite(Location location) {
+    print("Before remove: ${Hive.box<Location>(boxName).values}");
+    Hive.box<Location>(boxName).delete(location.id);
+    print("After remove: ${Hive.box<Location>(boxName).values}");
+  }
+
 
   @override
   void setAsFavorite(Location location) => Hive.box<Location>(boxName).put(location.id, location);
