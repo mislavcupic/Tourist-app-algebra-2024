@@ -12,6 +12,8 @@ import 'package:tourist_project_mc/features/auth/presentation/screen/sign_in_scr
 import 'package:tourist_project_mc/features/common/presentation/widget/custom_primary_button.dart';
 import 'package:tourist_project_mc/features/auth/presentation/widget/custom_text_field.dart';
 
+import '../../../../core/theme_notifier.dart';
+
 class SignUpScreen extends StatefulHookConsumerWidget {
   const SignUpScreen({super.key});
 
@@ -47,7 +49,7 @@ class _SignUpScreenState extends ConsumerState<SignUpScreen> {
   Widget build(BuildContext context) {
     final authState = ref.watch(authNotifier);
     final isLoading = useState(false);
-
+    final themeMode = ref.watch(themeNotifierProvider);
 
     if (authState is AuthenticatedState) {
       print("SUCCESS!");
@@ -165,21 +167,24 @@ class _SignUpScreenState extends ConsumerState<SignUpScreen> {
                   Text.rich(
                     TextSpan(
                       text: "Already have an account? ",
-                      style: context.textDescription.copyWith(
-                        color: Theme.of(context).colorScheme.onPrimary, // Osigurava vidljivost
+                      style: TextStyle(
+                        color: themeMode == ThemeMode.light
+                            ? Colors.black // Na svetloj temi crna boja
+                            : Colors.white, // Na tamnoj temi bela boja
                       ),
                       children: [
                         TextSpan(
                           text: "Sign in.",
-                          style: context.textButton.copyWith(
-                            color: Theme.of(context).colorScheme.primary, // Osigurava vidljivost
+                          style: TextStyle(
+                            color: Theme.of(context).colorScheme.primary, // Primarna boja ostaje
+                            fontWeight: FontWeight.bold,
                           ),
                           recognizer: TapGestureRecognizer()
                             ..onTap = () {
                               Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                  builder: (context) => SignUpScreen(),
+                                  builder: (context) => SignInScreen(),
                                 ),
                               );
                             },
@@ -187,6 +192,7 @@ class _SignUpScreenState extends ConsumerState<SignUpScreen> {
                       ],
                     ),
                   ),
+
                   const SizedBox(height: 30),
                 ],
               ),

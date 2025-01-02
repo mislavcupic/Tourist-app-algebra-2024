@@ -25,12 +25,12 @@ class _SignInScreenState extends ConsumerState<SignInScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final themeMode = ref.watch(themeNotifierProvider);
     final authState = ref.watch(authNotifier);
     final isLoading = useState(false);
-
     final emailController = useTextEditingController();
     final passwordController = useTextEditingController();
-
+    final brightness = Theme.of(context).brightness;
     useValueChanged<AuthState, void>(authState, (_, newValue) {
       WidgetsBinding.instance.addPostFrameCallback((_) {
         switch (authState) {
@@ -120,14 +120,19 @@ class _SignInScreenState extends ConsumerState<SignInScreen> {
                   Text.rich(
                     TextSpan(
                       text: "Don't have an account? ",
-                      style: context.textDescription.copyWith(
-                        color: Theme.of(context).colorScheme.onPrimary, // Osigurava vidljivost
+                      style: TextStyle(
+
+                          color: themeMode == ThemeMode.light
+                              ? Colors.black // Na svetloj temi crna boja
+                              : Colors.white, // Na tamnoj temi bela boja
+
                       ),
                       children: [
                         TextSpan(
                           text: "Sign up.",
-                          style: context.textButton.copyWith(
-                            color: Theme.of(context).colorScheme.primary, // Osigurava vidljivost
+                          style: TextStyle(
+                            color: Theme.of(context).colorScheme.primary, // Primarna boja ostaje
+                            fontWeight: FontWeight.bold,
                           ),
                           recognizer: TapGestureRecognizer()
                             ..onTap = () {
@@ -150,8 +155,12 @@ class _SignInScreenState extends ConsumerState<SignInScreen> {
                     children: [
                       Text(
                         "Theme",
-                        style: context.textDescription.copyWith(
-                          color: Theme.of(context).colorScheme.onPrimary,
+                        style: TextStyle(
+
+                          color: themeMode == ThemeMode.light
+                              ? Colors.black // Na svetloj temi crna boja
+                              : Colors.white, // Na tamnoj temi bela boja
+
                         ),
                       ),
                       SizedBox(width: 10),
@@ -162,7 +171,7 @@ class _SignInScreenState extends ConsumerState<SignInScreen> {
                         child: AnimatedSwitcher(
                           duration: const Duration(milliseconds: 300),
                           child: ref.watch(themeNotifierProvider) == ThemeMode.dark
-                              ? Icon(Icons.nightlight_round, key: ValueKey('dark'), size: 28,color: context.colorBorder,)
+                              ? Icon(Icons.nightlight_round, key: ValueKey('dark'), size: 28,color: context.colorText,)
                               : Icon(Icons.wb_sunny, key: ValueKey('light'), size: 28),
                         ),
                       ),
