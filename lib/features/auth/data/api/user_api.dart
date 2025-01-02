@@ -10,24 +10,7 @@ class UserApi {
     return credentials.user;
   }
 
-  //sign_up - firebase
-  /* kod koji smo koristili dosad
-  Future<User?> signUp(String email, String password) async {
-    final credentials = await instance.createUserWithEmailAndPassword(
-      email: email,
-      password: password,
-    );
 
-    final user = credentials.user;
-
-    if (user != null) {
-      await user.sendEmailVerification();
-      print('User is successfully creatan');// Slanje verifikacijskog emaila
-    }
-
-    return user;
-  }
-*/
   Future<User?> signUp(String email, String password) async {
     print("API: signUp called with email: $email");
 
@@ -50,7 +33,7 @@ class UserApi {
       return user;
     } catch (e) {
       print("API: Error during sign-up - $e");
-      rethrow; // Ponovno pokreće grešku, tako da možete obraditi u gornjem sloju
+      rethrow;
     }
   }
   Future<void> resendVerificationEmail() async {
@@ -62,7 +45,7 @@ class UserApi {
         print("API: Verification email resent.");
       } catch (e) {
         print("API: Error resending verification email - $e");
-        rethrow; // Prosljeđuje grešku za daljnju obradu
+        rethrow;
       }
     } else {
       print("API: No user signed in or email already verified.");
@@ -86,7 +69,7 @@ class UserApi {
       User? user = instance.currentUser;
 
       if (user != null) {
-        await user.delete(); // Brisanje naloga
+        await user.delete();
         print("User account deleted successfully.");
       } else {
         print("No user is signed in.");
@@ -94,11 +77,11 @@ class UserApi {
     } on FirebaseAuthException catch (e) {
       if (e.code == 'requires-recent-login') {
         print("The user must reauthenticate before this operation can be executed.");
-        // Ignorisanje reautentifikacije za sada.
+
       } else {
         print("Error deleting user account: ${e.message}");
       }
-      throw e; // I dalje vraćamo grešku za viši sloj, ako treba.
+      throw e;
     }
   }
 
@@ -113,7 +96,7 @@ class UserApi {
           password: password,
         );
 
-        // Reauthenticate the user
+        // ne koristim, ali me dokumentacija firebase vodi da to treba isto, trebam proučiti
         await user.reauthenticateWithCredential(credential);
         print("User re-authenticated successfully.");
       } else {
@@ -121,7 +104,7 @@ class UserApi {
       }
     } on FirebaseAuthException catch (e) {
       print("Error during re-authentication: ${e.message}");
-      throw e; // Re-throw for handling in higher layers.
+      throw e;
     }
   }
 }

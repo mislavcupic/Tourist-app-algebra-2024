@@ -13,8 +13,6 @@ class UserRepositoryImpl implements UserRepository {
   Future<Either<Failure, User?>> signIn(String email, String password) async {
     try {
       final user = await _userApi.signIn(email, password);
-
-      // Provjera je li korisnikov email verificiran
       if (user != null && !user.emailVerified) {
         return Left(
             FirebaseAuthFailure("Please verify your email before logging in."));
@@ -39,7 +37,6 @@ class UserRepositoryImpl implements UserRepository {
       print("Repository: User received: ${user?.email}");
       return Right(user);
     } on FirebaseAuthException catch (e) {
-      // Obrada specifičnih grešaka za FirebaseAuth
       if (e.code == 'email-already-in-use') {
         return Left(FirebaseAuthFailure(
             "The email is already in use. Please use a different email."));

@@ -15,6 +15,6 @@ abstract interface class UserRepository {
   //delete account
   Future<Either<Failure,Unit>> deactivate();
 
-  //reauthenticate
+  //reauthenticate - ne koristim
   Future<Either<Failure,Unit>> reauthenticate(String email,String password);
 }

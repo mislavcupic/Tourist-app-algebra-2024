@@ -17,16 +17,14 @@ class ForgotPasswordScreen extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final emailController = TextEditingController();
 
-    // Pristupamo stanju iz kontrolera
     final resetState = ref.watch(resetPasswordControllerProvider);
 
-    // Definicija `isLoading` i resetPassword funkcije unutar `build`
     final isLoading = resetState is PasswordResetLoading;
 
     void resetPassword() {
       final email = emailController.text;
       if (email.isNotEmpty) {
-        // Pozivanje metode za resetiranje lozinke
+
         ref.read(resetPasswordControllerProvider.notifier).resetPassword(email);
       } else {
         ScaffoldMessenger.of(context).showSnackBar(
@@ -80,7 +78,7 @@ class ForgotPasswordScreen extends ConsumerWidget {
                 textAlign: TextAlign.center,
               ),
               const SizedBox(height: 50),
-              // Unos email adrese
+
               CustomTextField(
                 label: "Email",
                 controller: emailController,
@@ -89,7 +87,7 @@ class ForgotPasswordScreen extends ConsumerWidget {
 
               const SizedBox(height: 20),
 
-              // custombutton za resetiranje lozinke
+
               CustomPrimaryButton(
                 onPressed: isLoading
                     ? () {} // Prazna funkcija kada je učitavanje aktivno

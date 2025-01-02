@@ -8,7 +8,6 @@ class ResendEmailUseCase {
   ResendEmailUseCase(this._repository);
 
   Future<Either<AppError, Unit>> call(String email) async {
-    // Pozivamo resetPassword metodu iz repository sloja i prosljeđujemo email
     return await _repository.resendEmail(email);
   }
 }

@@ -24,7 +24,7 @@ class SignUpScreen extends StatefulHookConsumerWidget {
 class _SignUpScreenState extends ConsumerState<SignUpScreen> {
   final _formKey = GlobalKey<FormState>();
 
-  // Klasni kontroleleri umjesto useTextEditingController
+
   late final passwordController;
   late final confirmPasswordController;
   late final emailController;
