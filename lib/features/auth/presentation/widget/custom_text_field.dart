@@ -22,7 +22,7 @@ class CustomTextField extends StatelessWidget {
     final colors = Theme.of(context).extension<AppColors>();
 
     return TextFormField(
-      style: context.textDescription.copyWith(color: colors?.text), // Dinamička boja teksta
+      style: context.textDescription.copyWith(color: colors?.text),
       controller: controller,
       autovalidateMode: AutovalidateMode.onUserInteraction,
       validator: validator,
@@ -33,30 +33,30 @@ class CustomTextField extends StatelessWidget {
         enabledBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(20),
           borderSide: BorderSide(
-            color: colors?.border ?? context.colorBorder, // Dinamička boja granice
+            color: colors?.border ?? context.colorBorder,
             width: 1,
           ),
         ),
         hintText: label,
-        hintStyle: TextStyle(color: colors?.text?.withOpacity(0.5)), // Dinamička boja hint teksta
+        hintStyle: TextStyle(color: colors?.text?.withOpacity(0.5)),
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(20),
           borderSide: BorderSide(
-            color: colors?.border ?? context.colorBorder, // Dinamička boja granice
+            color: colors?.border ?? context.colorBorder,
             width: 1,
           ),
         ),
         focusedBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(20),
           borderSide: BorderSide(
-            color: colors?.border ?? context.colorBorder, // Dinamička boja granice
+            color: colors?.border ?? context.colorBorder,
             width: 1,
           ),
         ),
         errorBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(20),
           borderSide: BorderSide(
-            color: colors?.error ?? context.colorError, // Dinamička boja greške
+            color: colors?.error ?? context.colorError,
             width: 1,
           ),
         ),

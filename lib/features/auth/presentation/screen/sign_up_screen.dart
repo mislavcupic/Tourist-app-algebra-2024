@@ -55,14 +55,13 @@ class _SignUpScreenState extends ConsumerState<SignUpScreen> {
       print("SUCCESS!");
       isLoading.value = false;
       if (mounted) {
-        Navigator.of(context).pushReplacementNamed(AppRoute.home); // Provjerite 'mounted' prije navigacije
+        Navigator.of(context).pushReplacementNamed(AppRoute.home);
       }
     } else if (authState is LoadingState) {
       print("LOADING!");
       isLoading.value = true;
     } else if (authState is UnauthenticatedState) {
       isLoading.value = false;
-      // Provjera null vrijednosti failure objekta prije nego što pristupimo 'failure.message'
       final failure = authState.failure;
       if (failure != null) {
         WidgetsBinding.instance.addPostFrameCallback((_) {
@@ -75,7 +74,6 @@ class _SignUpScreenState extends ConsumerState<SignUpScreen> {
       }
     } else if (authState is EmailVerificationState) {
       print("Email verification sent!");
-      // Navigacija na ekran za verifikaciju
 
       if (mounted) {
         SchedulerBinding.instance.addPostFrameCallback((_) {
@@ -169,8 +167,8 @@ class _SignUpScreenState extends ConsumerState<SignUpScreen> {
                       text: "Already have an account? ",
                       style: TextStyle(
                         color: themeMode == ThemeMode.light
-                            ? Colors.black // Na svetloj temi crna boja
-                            : Colors.white, // Na tamnoj temi bela boja
+                            ? Colors.black
+                            : Colors.white,
                       ),
                       children: [
                         TextSpan(
@@ -225,17 +223,16 @@ class _SignUpScreenState extends ConsumerState<SignUpScreen> {
   }
 
   void _signUp(final String email, final String password) {
-    if (!mounted) return; // Provjera ako je widget još uvijek montiran
+    if (!mounted) return;
     if (_formKey.currentState!.validate()) {
       if (password != confirmPasswordController.text) {
         final snackBar = SnackBar(content: Text("Passwords do not match."));
         ScaffoldMessenger.of(context).showSnackBar(snackBar);
         return;
       }
-      // Provjera 'mounted' prije nego što nastavite s pozivom asinhronih funkcija.
       if (!mounted) return;
       ref.read(authNotifier.notifier).signUp(email, password);
-      print("Current authState: $authNotifier"); // Dodajte ovo za praćenje stanja
+      print("Current authState: $authNotifier");
     }
   }
 }

@@ -30,7 +30,7 @@ class _SignInScreenState extends ConsumerState<SignInScreen> {
     final isLoading = useState(false);
     final emailController = useTextEditingController();
     final passwordController = useTextEditingController();
-    final brightness = Theme.of(context).brightness;
+
     useValueChanged<AuthState, void>(authState, (_, newValue) {
       WidgetsBinding.instance.addPostFrameCallback((_) {
         switch (authState) {
@@ -54,6 +54,7 @@ class _SignInScreenState extends ConsumerState<SignInScreen> {
           case EmailVerificationState():
           //ignoriraj
           case AccountDeactivatedState():
+
           //ignoriraj
         }
       });
@@ -99,8 +100,8 @@ class _SignInScreenState extends ConsumerState<SignInScreen> {
                         style: TextStyle(
 
                           color: themeMode == ThemeMode.light
-                              ? Colors.black // Na svetloj temi crna boja
-                              : Colors.white, // Na tamnoj temi bela boja
+                              ? Colors.black
+                              : Colors.white,
 
                         ),
                         recognizer: TapGestureRecognizer()
@@ -129,15 +130,15 @@ class _SignInScreenState extends ConsumerState<SignInScreen> {
                       style: TextStyle(
 
                           color: themeMode == ThemeMode.light
-                              ? Colors.black // Na svetloj temi crna boja
-                              : Colors.white, // Na tamnoj temi bela boja
+                              ? Colors.black
+                              : Colors.white,
 
                       ),
                       children: [
                         TextSpan(
                           text: "Sign up.",
                           style: TextStyle(
-                            color: Theme.of(context).colorScheme.primary, // Primarna boja ostaje
+                            color: Theme.of(context).colorScheme.primary,
                             fontWeight: FontWeight.bold,
                           ),
                           recognizer: TapGestureRecognizer()
@@ -164,8 +165,8 @@ class _SignInScreenState extends ConsumerState<SignInScreen> {
                         style: TextStyle(
 
                           color: themeMode == ThemeMode.light
-                              ? Colors.black // Na svetloj temi crna boja
-                              : Colors.white, // Na tamnoj temi bela boja
+                              ? Colors.black
+                              : Colors.white,
 
                         ),
                       ),

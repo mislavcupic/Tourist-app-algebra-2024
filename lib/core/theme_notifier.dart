@@ -22,7 +22,7 @@ class ThemeNotifier extends StateNotifier<ThemeMode> {
 
     state = (state == ThemeMode.light) ? ThemeMode.dark : ThemeMode.light;
 
-    // Spremi temu u SharedPreferences (keširanje)
+    // ovdje spremam temu da pamti kad opet upalim app temu
     final prefs = await SharedPreferences.getInstance();
     prefs.setString('themeMode', state == ThemeMode.dark ? 'dark' : 'light');
   }

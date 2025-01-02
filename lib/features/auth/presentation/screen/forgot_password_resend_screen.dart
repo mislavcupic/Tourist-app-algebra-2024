@@ -61,8 +61,8 @@ class ForgotPasswordResendScreen extends ConsumerWidget {
                 style: TextStyle(
 
                   color: themeMode == ThemeMode.light
-                      ? Colors.black // Na svetloj temi crna boja
-                      : Colors.white, // Na tamnoj temi bela boja
+                      ? Colors.black
+                      : Colors.white,
 
                 ),
                 textAlign: TextAlign.center,
@@ -75,8 +75,8 @@ class ForgotPasswordResendScreen extends ConsumerWidget {
                   style: TextStyle(
 
                     color: themeMode == ThemeMode.light
-                        ? Colors.black // Na svetloj temi crna boja
-                        : Colors.white, // Na tamnoj temi bela boja
+                        ? Colors.black
+                        : Colors.white,
 
                   ),
                   children: [
@@ -85,8 +85,8 @@ class ForgotPasswordResendScreen extends ConsumerWidget {
                       style: TextStyle(
 
                         color: themeMode == ThemeMode.light
-                            ? Colors.black // Na svetloj temi crna boja
-                            : Theme.of(context).primaryColorDark, // Na tamnoj temi bela boja
+                            ? Colors.black
+                            : Theme.of(context).primaryColorDark,
 
                       ),
                       recognizer: TapGestureRecognizer()

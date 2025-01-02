@@ -30,8 +30,8 @@ class ForgotPasswordScreen extends ConsumerWidget {
           SnackBar(content: Text('Please enter a valid email address', style: TextStyle(
 
             color: themeMode == ThemeMode.light
-                ? Colors.black // Na svetloj temi crna boja
-                : Colors.white, // Na tamnoj temi bela boja
+                ? Colors.black
+                : Colors.white,
 
           ),
           )),
@@ -39,7 +39,7 @@ class ForgotPasswordScreen extends ConsumerWidget {
       }
     }
 
-    // Upravljanje stanjima
+
     if (resetState is PasswordResetSuccess) {
       SchedulerBinding.instance.addPostFrameCallback((_) {
         if (context.mounted) {
@@ -83,8 +83,8 @@ class ForgotPasswordScreen extends ConsumerWidget {
                 style:  TextStyle(
 
               color: themeMode == ThemeMode.light
-              ? Colors.black // Na svetloj temi crna boja
-                : Colors.white, // Na tamnoj temi bela boja
+              ? Colors.black
+                : Colors.white,
 
               ),
                 textAlign: TextAlign.center,
