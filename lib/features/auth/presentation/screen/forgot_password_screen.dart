@@ -6,7 +6,7 @@ import 'package:tourist_project_mc/features/auth/presentation/widget/custom_text
 
 import '../../../common/presentation/widget/custom_primary_button.dart';
 import 'package:tourist_project_mc/features/auth/presentation/controller/reset_password_controller.dart';
-
+import 'package:tourist_project_mc/core/theme_notifier.dart';
 import '../controller/state/password_reset_state.dart';
 import 'forgot_password_resend_screen.dart';
 
@@ -16,9 +16,8 @@ class ForgotPasswordScreen extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final emailController = TextEditingController();
-
+    final themeMode = ref.watch(themeNotifierProvider);
     final resetState = ref.watch(resetPasswordControllerProvider);
-
     final isLoading = resetState is PasswordResetLoading;
 
     void resetPassword() {
@@ -28,7 +27,14 @@ class ForgotPasswordScreen extends ConsumerWidget {
         ref.read(resetPasswordControllerProvider.notifier).resetPassword(email);
       } else {
         ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text('Please enter a valid email address')),
+          SnackBar(content: Text('Please enter a valid email address', style: TextStyle(
+
+            color: themeMode == ThemeMode.light
+                ? Colors.black // Na svetloj temi crna boja
+                : Colors.white, // Na tamnoj temi bela boja
+
+          ),
+          )),
         );
       }
     }
@@ -74,7 +80,13 @@ class ForgotPasswordScreen extends ConsumerWidget {
               const SizedBox(height: 40),
               Text(
                 "Please enter your email address to reset your password.",
-                style: context.textSubtitle,
+                style:  TextStyle(
+
+              color: themeMode == ThemeMode.light
+              ? Colors.black // Na svetloj temi crna boja
+                : Colors.white, // Na tamnoj temi bela boja
+
+              ),
                 textAlign: TextAlign.center,
               ),
               const SizedBox(height: 50),
