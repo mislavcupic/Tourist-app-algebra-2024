@@ -5,14 +5,17 @@ import 'package:tourist_project_mc/core/di.dart';
 import 'package:tourist_project_mc/core/style/style_extensions.dart';
 import 'package:tourist_project_mc/features/common/presentation/widget/custom_primary_button.dart';
 
+import '../../../../core/theme_notifier.dart';
+
 class EmailVerification extends ConsumerWidget {
   const EmailVerification({super.key});
+
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final authApi = ref.watch(userApiProvider);
     final isLoading = ValueNotifier(false);
-
+    final themeMode = ref.watch(themeNotifierProvider);
     Future<void> resendEmail() async {
       isLoading.value = true; // Start loading
       try {
@@ -56,7 +59,13 @@ class EmailVerification extends ConsumerWidget {
               const SizedBox(height: 20),
               Text(
                 "Please check your inbox and verify your email address.",
-                style: context.textSubtitle,
+                style:TextStyle(
+
+                  color: themeMode == ThemeMode.light
+                      ? Colors.black // Na svetloj temi crna boja
+                      : Colors.white, // Na tamnoj temi bela boja
+
+                ),
                 textAlign: TextAlign.center,
               ),
 
@@ -64,11 +73,23 @@ class EmailVerification extends ConsumerWidget {
               Text.rich(
                 TextSpan(
                   text: "Didn't receive an email? ",
-                  style: context.textDescription,
+                  style: TextStyle(
+
+                    color: themeMode == ThemeMode.light
+                        ? Colors.black // Na svetloj temi crna boja
+                        : Colors.white, // Na tamnoj temi bela boja
+
+                  ),
                   children: [
                     TextSpan(
                       text: "Resend.",
-                      style: context.textButton,
+                      style: TextStyle(
+
+                        color: themeMode == ThemeMode.light
+                            ? Colors.black // Na svetloj temi crna boja
+                            : Theme.of(context).primaryColorDark, // Na tamnoj temi bela boja
+
+                      ),
                       recognizer: TapGestureRecognizer()
                         ..onTap = () => resendEmail(),
                     ),

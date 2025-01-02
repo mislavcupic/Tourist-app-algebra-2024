@@ -18,8 +18,13 @@ class ThemeNotifier extends StateNotifier<ThemeMode> {
     state = themeMode == 'dark' ? ThemeMode.dark : ThemeMode.light;
   }
 // Metoda za prebacivanje teme
-  void toggleTheme() {
+  void toggleTheme() async {
+    // Promeni temu
     state = (state == ThemeMode.light) ? ThemeMode.dark : ThemeMode.light;
+
+    // Spremi novu temu u SharedPreferences
+    final prefs = await SharedPreferences.getInstance();
+    prefs.setString('themeMode', state == ThemeMode.dark ? 'dark' : 'light');
   }
 
   // Postavljanje svijetle teme

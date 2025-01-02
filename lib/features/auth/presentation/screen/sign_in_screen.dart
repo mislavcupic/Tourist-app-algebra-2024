@@ -96,7 +96,13 @@ class _SignInScreenState extends ConsumerState<SignInScreen> {
                     child: Text.rich(
                       TextSpan(
                         text: "Forgot password?",
-                        style: context.textButton,
+                        style: TextStyle(
+
+                          color: themeMode == ThemeMode.light
+                              ? Colors.black // Na svetloj temi crna boja
+                              : Colors.white, // Na tamnoj temi bela boja
+
+                        ),
                         recognizer: TapGestureRecognizer()
                           ..onTap = () {
                             Navigator.push(
