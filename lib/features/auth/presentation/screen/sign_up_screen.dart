@@ -235,4 +235,5 @@ class _SignUpScreenState extends ConsumerState<SignUpScreen> {
       print("Current authState: $authNotifier");
     }
   }
+
 }

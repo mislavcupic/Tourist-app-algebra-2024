@@ -1,5 +1,6 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:tourist_project_mc/core/app_route.dart';
@@ -143,12 +144,7 @@ class _SignInScreenState extends ConsumerState<SignInScreen> {
                           ),
                           recognizer: TapGestureRecognizer()
                             ..onTap = () {
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) => SignUpScreen(),
-                                ),
-                              );
+                            Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context)=>SignUpScreen()), (route)=>false);
                             },
                         ),
                       ],
@@ -231,5 +227,16 @@ class _SignInScreenState extends ConsumerState<SignInScreen> {
     if (_formKey.currentState!.validate()) {
       ref.read(authNotifier.notifier).signIn(email, password);
     }
+  }
+  void _testNavigatorIssue(BuildContext context) async {
+    debugPrint('Start test navigator issue');
+    await Future.delayed(const Duration(milliseconds: 500));
+    SchedulerBinding.instance.addPostFrameCallback((_) {
+      debugPrint('Navigating to SignUp');
+      Navigator.of(context).pushNamedAndRemoveUntil(
+        AppRoute.signUp,
+            (route) => false,
+      );
+    });
   }
 }

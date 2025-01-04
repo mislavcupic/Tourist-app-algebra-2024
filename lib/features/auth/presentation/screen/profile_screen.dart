@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:tourist_project_mc/core/di.dart';
 import 'package:tourist_project_mc/core/style/style_extensions.dart';
 import '../../../../core/app_route.dart';
@@ -21,19 +23,22 @@ class ProfileScreen extends ConsumerWidget {
         );
       },
           (success) async {
+        // Prikaz poruke o uspješnom odjavljivanju
         ScaffoldMessenger.of(context).showSnackBar(
           const SnackBar(content: Text("Signed out successfully.")),
         );
+        debugPrint('Current User: ${FirebaseAuth.instance.currentUser}');
 
-        await Future.delayed(const Duration(milliseconds: 500));
-
-        // Navigacija u post-frame callback-u
-        WidgetsBinding.instance.addPostFrameCallback((_) {
-          // Koristimo pushReplacementNamed da obrišemo sve prethodne rute
-          Navigator.pushReplacementNamed(
-            context,
-            AppRoute.signIn,
-          );
+        // Umesto addPostFrameCallback koristi SchedulerBinding
+        SchedulerBinding.instance.addPostFrameCallback((_) {
+          if (ModalRoute.of(context)?.isCurrent ?? true) {
+            Navigator.of(context).pushNamedAndRemoveUntil(
+              AppRoute.signIn,
+                  (route) => false, // Uklanja sve prethodne rute
+            );
+          } else {
+            debugPrint('Navigator is locked, skipping navigation.');
+          }
         });
       },
     );
