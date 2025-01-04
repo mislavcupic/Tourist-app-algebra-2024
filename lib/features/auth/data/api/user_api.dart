@@ -61,9 +61,10 @@ class UserApi {
   }
 
   Future<void> signOut() async {
-    await instance.signOut();
     final prefs = await SharedPreferences.getInstance();
     await prefs.clear();
+    await instance.signOut();
+
 
   }
 
