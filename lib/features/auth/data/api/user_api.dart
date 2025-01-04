@@ -64,6 +64,7 @@ class UserApi {
     await instance.signOut();
     final prefs = await SharedPreferences.getInstance();
     await prefs.clear();
+
   }
 
 
@@ -75,9 +76,7 @@ class UserApi {
         await user.delete();
         print("User account deleted successfully.");
 
-        // Nakon brisanja korisničkog računa, brišemo podatke iz lokalne pohrane.
-        final prefs = await SharedPreferences.getInstance();
-        await prefs.clear();
+
 
 
 

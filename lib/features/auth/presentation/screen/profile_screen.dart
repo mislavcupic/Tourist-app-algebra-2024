@@ -25,14 +25,14 @@ class ProfileScreen extends ConsumerWidget {
           const SnackBar(content: Text("Signed out successfully.")),
         );
 
-        await Future.delayed(const Duration(milliseconds: 200));
+        await Future.delayed(const Duration(milliseconds: 500));
 
         // Navigacija u post-frame callback-u
         WidgetsBinding.instance.addPostFrameCallback((_) {
-          Navigator.pushNamedAndRemoveUntil(
+          // Koristimo pushReplacementNamed da obrišemo sve prethodne rute
+          Navigator.pushReplacementNamed(
             context,
             AppRoute.signIn,
-                (route) => false,
           );
         });
       },
@@ -54,14 +54,14 @@ class ProfileScreen extends ConsumerWidget {
           const SnackBar(content: Text("Account deleted successfully.")),
         );
 
-        await Future.delayed(const Duration(milliseconds: 200));
+        await Future.delayed(const Duration(milliseconds: 500));
 
-
+        // Navigacija u post-frame callback-u
         WidgetsBinding.instance.addPostFrameCallback((_) {
-          Navigator.pushNamedAndRemoveUntil(
+          // Obriši sve rute i preusmjeri na ekran za prijavu
+          Navigator.pushReplacementNamed(
             context,
             AppRoute.signIn,
-                (route) => false,
           );
         });
       },
@@ -72,19 +72,16 @@ class ProfileScreen extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final user = FirebaseAuth.instance.currentUser;
 
-
     return Scaffold(
       appBar: AppBar(
-        title:  Text('My Profile', style: context.textTitle , textAlign: TextAlign.left,),
-
+        title: Text('My Profile', style: context.textTitle, textAlign: TextAlign.left),
       ),
-
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            const SizedBox(height: 60,),
+            const SizedBox(height: 60),
             CircleAvatar(
               radius: 80,
               backgroundImage: const AssetImage('assets/images/profile_placeholder.png'),
@@ -97,10 +94,8 @@ class ProfileScreen extends ConsumerWidget {
                   height: 100,
                   fit: BoxFit.cover,
                 ),
-
               ),
             ),
-
             const SizedBox(height: 10),
             Text(
               user?.displayName ?? 'Name not available',
@@ -111,16 +106,16 @@ class ProfileScreen extends ConsumerWidget {
               user?.email ?? 'Email not available',
               style: const TextStyle(fontSize: 16, color: Colors.grey),
             ),
-          Spacer(),
+            const Spacer(),
             CustomPrimaryButton(
-              child:  Text('Deactivate Account',style: context.textButton.copyWith(color: Colors.white)),
+              child: Text('Deactivate Account', style: context.textButton.copyWith(color: Colors.white)),
               onPressed: () async {
                 await _handleDeleteAccount(context, ref);
               },
             ),
             const SizedBox(height: 16),
             CustomPrimaryButton(
-              child:  Text('Sign Out',style: context.textButton.copyWith(color: Colors.white)),
+              child: Text('Sign Out', style: context.textButton.copyWith(color: Colors.white)),
               onPressed: () async {
                 await _handleSignOut(context, ref);
               },
