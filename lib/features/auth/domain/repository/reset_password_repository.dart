@@ -1,7 +1,8 @@
 import 'package:dartz/dartz.dart';
-import 'package:tourist_project_mc/core/error/app_error.dart';
+import 'package:tourist_project_mc/core/error/failure.dart';
+
 
 abstract interface class ResetPasswordRepository {
-  Future<Either<AppError, Unit>> resetPassword(String email);
-  Future<Either<AppError, Unit>> resendEmail(String email);
+  Future<Either<Failure, Unit>> resetPassword(String email);
+  Future<Either<Failure, Unit>> resendEmail(String email);
 }

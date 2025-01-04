@@ -27,13 +27,16 @@ class FavoriteListController extends Notifier<FavoriteListState> {
   }
 
   void setAsFavorite(final Location location) {
+    location.isFavorite = true;
     _setAsFavorite(location);
     getAllFavorites();
+    ref.read(locationListNotifier.notifier).updateWithValue(location);
   }
 
   void removeAsFavorite(final Location location) {
-    print("removeAsFavorite called for: ${location.title}");
+    location.isFavorite = false;
     _removeAsFavorite(location);
     getAllFavorites();
+    ref.read(locationListNotifier.notifier).updateWithValue(location);
   }
 }

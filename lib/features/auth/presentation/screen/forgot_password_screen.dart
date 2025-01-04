@@ -3,7 +3,6 @@ import 'package:flutter/scheduler.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:tourist_project_mc/core/style/style_extensions.dart';
 import 'package:tourist_project_mc/features/auth/presentation/widget/custom_text_field.dart';
-
 import '../../../common/presentation/widget/custom_primary_button.dart';
 import 'package:tourist_project_mc/features/auth/presentation/controller/reset_password_controller.dart';
 import 'package:tourist_project_mc/core/theme_notifier.dart';
@@ -12,6 +11,7 @@ import 'forgot_password_resend_screen.dart';
 
 class ForgotPasswordScreen extends ConsumerWidget {
   const ForgotPasswordScreen({super.key});
+
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -55,7 +55,7 @@ class ForgotPasswordScreen extends ConsumerWidget {
       SchedulerBinding.instance.addPostFrameCallback((_) {
         if (context.mounted) {
           ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(content: Text(resetState.errorMessage)),
+            SnackBar(content: Text(resetState.failure as String)),
           );
         }
       });

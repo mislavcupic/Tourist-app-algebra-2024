@@ -4,6 +4,7 @@ import 'package:tourist_project_mc/features/locations/data/api/location_api.dart
 import 'package:tourist_project_mc/features/locations/data/database/database_manager.dart';
 import 'package:tourist_project_mc/features/locations/domain/model/location.dart';
 import 'package:tourist_project_mc/features/locations/domain/repository/location_repository.dart';
+import 'package:dartz/dartz.dart';
 
 class LocationRepositoryImpl implements LocationRepository {
   final LocationApi _locationApi;
@@ -14,11 +15,24 @@ class LocationRepositoryImpl implements LocationRepository {
   @override
   Future<Either<Failure, List<Location>>> getAllLocations() async {
     try {
-      final result = await _locationApi.getAllLocations();
+      final response = await _locationApi.getAllLocations();
+      final favorites = _databaseManager.getAllLocations();
+
+      final result = _applyFavoriteFlags(response, favorites);
+
       return Right(result);
     } catch (e) {
       return Left(NetworkFailure("There was a network issue."));
     }
+  }
+
+  List<Location> _applyFavoriteFlags(final List<Location> response, final List<Location> favorites) {
+    for (var location in response) {
+      if (favorites.contains(location)) {
+        location.isFavorite = true;
+      }
+    }
+    return response;
   }
 
   @override

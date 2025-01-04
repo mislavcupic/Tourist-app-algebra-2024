@@ -6,7 +6,6 @@ import 'package:tourist_project_mc/features/locations/domain/model/location.dart
 import 'package:tourist_project_mc/features/locations/presentation/location_detail/screen/location_detail_screen.dart';
 import 'package:tourist_project_mc/features/locations/presentation/widget/star_rating.dart';
 
-import '../../favorite_list/controller/state/favorite_list_state.dart';
 
 class LocationCard extends ConsumerWidget {
   final Location location;
@@ -15,11 +14,6 @@ class LocationCard extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final state = ref.watch(favoriteListNotifier);
-
-
-    final isFavorite = (state is FilledState && state.favorites.contains(location));
-
     return GestureDetector(
       onTap: () => Navigator.of(context).push(
         MaterialPageRoute(
@@ -40,11 +34,14 @@ class LocationCard extends ConsumerWidget {
           children: [
             ClipRRect(
               borderRadius: BorderRadius.circular(7),
-              child: Image.network(
-                location.imageUrl,
-                width: 110,
-                height: 85,
-                fit: BoxFit.cover,
+              child: Hero(
+                tag: 'location${location.id}',
+                child: Image.network(
+                  location.imageUrl,
+                  width: 110,
+                  height: 85,
+                  fit: BoxFit.cover,
+                ),
               ),
             ),
             const SizedBox(width: 8),
@@ -57,33 +54,29 @@ class LocationCard extends ConsumerWidget {
                   Text("${location.lat}, ${location.lng}", style: context.textCardText),
                   Spacer(),
                   StarRating(
-                    rating: location.rating,
-                    activeStar: Icon(Icons.star, color: Colors.yellow),
-                    inactiveStar: Icon(Icons.star, color: Colors.grey),
-                  ),
+                   rating: location.rating,
+                   activeStar: Icon(Icons.star, color: Colors.yellow),
+                   inactiveStar: Icon(Icons.star, color: Colors.grey),
+                 ),
                 ],
               ),
             ),
             GestureDetector(
-              onTap: () {
-                // Ako je lokacija već favorit, ukloni je, inače dodaj
-                if (isFavorite) {
-                  ref.read(favoriteListNotifier.notifier).removeAsFavorite(location);
-                } else {
-                  ref.read(favoriteListNotifier.notifier).setAsFavorite(location);
-                }
-              },
+              onTap: () => _toggleFavoriteState(ref, location),
               child: Padding(
                 padding: const EdgeInsets.all(8.0),
-                child: Icon(
-                  isFavorite ? Icons.favorite : Icons.favorite_border, // Promijenjena ikona
-                  color: Colors.white,
-                ),
+                child: Icon(location.isFavorite ? Icons.favorite : Icons.favorite_outline, color: Colors.white),
               ),
             ),
           ],
         ),
       ),
     );
+  }
+
+  void _toggleFavoriteState(final WidgetRef ref, final Location location) {
+    location.isFavorite
+        ? ref.read(favoriteListNotifier.notifier).removeAsFavorite(location)
+        : ref.read(favoriteListNotifier.notifier).setAsFavorite(location);
   }
 }

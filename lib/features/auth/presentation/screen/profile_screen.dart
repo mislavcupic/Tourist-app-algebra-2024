@@ -75,29 +75,33 @@ class ProfileScreen extends ConsumerWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text('My Profile'),
-        centerTitle: true,
+        title:  Text('My Profile', style: context.textTitle , textAlign: TextAlign.left,),
+
       ),
+
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
+            const SizedBox(height: 60,),
             CircleAvatar(
-              radius: 50,
+              radius: 80,
               backgroundImage: const AssetImage('assets/images/profile_placeholder.png'),
               child: user?.photoURL == null
                   ? null
                   : ClipOval(
-                child: Image.network(
+                child: Image.asset(
                   user!.photoURL!,
                   width: 100,
                   height: 100,
                   fit: BoxFit.cover,
                 ),
+
               ),
             ),
-            const SizedBox(height: 16),
+
+            const SizedBox(height: 10),
             Text(
               user?.displayName ?? 'Name not available',
               style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
@@ -107,7 +111,7 @@ class ProfileScreen extends ConsumerWidget {
               user?.email ?? 'Email not available',
               style: const TextStyle(fontSize: 16, color: Colors.grey),
             ),
-            const SizedBox(height: 32),
+          Spacer(),
             CustomPrimaryButton(
               child:  Text('Deactivate Account',style: context.textButton.copyWith(color: Colors.white)),
               onPressed: () async {

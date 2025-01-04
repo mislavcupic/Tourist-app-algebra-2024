@@ -1,4 +1,5 @@
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class UserApi {
   final FirebaseAuth instance;
@@ -61,6 +62,8 @@ class UserApi {
 
   Future<void> signOut() async {
     await instance.signOut();
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.clear();
   }
 
 
@@ -71,6 +74,14 @@ class UserApi {
       if (user != null) {
         await user.delete();
         print("User account deleted successfully.");
+
+        // Nakon brisanja korisničkog računa, brišemo podatke iz lokalne pohrane.
+        final prefs = await SharedPreferences.getInstance();
+        await prefs.clear();
+
+
+
+
       } else {
         print("No user is signed in.");
       }

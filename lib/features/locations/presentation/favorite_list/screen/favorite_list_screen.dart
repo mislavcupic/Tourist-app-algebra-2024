@@ -5,6 +5,8 @@ import 'package:tourist_project_mc/core/style/style_extensions.dart';
 import 'package:tourist_project_mc/features/locations/presentation/favorite_list/controller/state/favorite_list_state.dart';
 import 'package:tourist_project_mc/features/locations/presentation/location_list/widget/location_card.dart';
 
+import '../../location_list/widget/empty_favorite_state_widget.dart';
+
 class FavoriteListScreen extends ConsumerWidget {
   const FavoriteListScreen({super.key});
 
@@ -28,7 +30,7 @@ class FavoriteListScreen extends ConsumerWidget {
                     itemBuilder: (context, index) => LocationCard(list[index]),
                   ),
                 ),
-                EmptyState() => Text("Empty :(")
+                EmptyState() => Expanded(child: EmptyFavoriteStateWidget()),
               }
             ],
           ),

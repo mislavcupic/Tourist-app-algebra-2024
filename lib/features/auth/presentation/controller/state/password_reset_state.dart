@@ -1,3 +1,5 @@
+import '../../../../../core/error/failure.dart';
+
 sealed class PasswordResetState {}
 
 class PasswordResetInitial extends PasswordResetState {}
@@ -11,7 +13,7 @@ class PasswordResetSuccess extends PasswordResetState {
 }
 
 class PasswordResetFailure extends PasswordResetState {
-  final String errorMessage;
+  final Failure? failure;
 
-  PasswordResetFailure(this.errorMessage);
+  PasswordResetFailure({this.failure = null});
 }
