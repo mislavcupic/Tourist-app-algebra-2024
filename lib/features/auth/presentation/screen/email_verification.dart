@@ -43,6 +43,12 @@ class EmailVerification extends ConsumerWidget {
     return Scaffold(
       resizeToAvoidBottomInset: false,
       appBar: AppBar(
+        leading: IconButton(
+          icon: const Icon(Icons.arrow_back),
+          onPressed: () {
+            Navigator.of(context).pop();
+          },
+        ),
         title: Transform.translate(
           offset: const Offset(75, 0),
           child: const Text('Verify email', style: TextStyle(fontWeight: FontWeight.w600)),
