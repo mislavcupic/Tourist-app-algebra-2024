@@ -11,7 +11,6 @@ class AppRoute {
   AppRoute._();
   static const splash = '/';
   static const signIn = '/signIn';
-  static const signOut = signIn;
   static const signUp = '/signUp';
   static const home = '/home';
   static const details = '/details';
@@ -22,8 +21,6 @@ class AppRoute {
       case splash:
         return MaterialPageRoute(builder: (_) => const SplashScreen());
       case signIn:
-        return MaterialPageRoute(builder: (_) => const SignInScreen());
-      case signOut:
         return MaterialPageRoute(builder: (_) => const SignInScreen());
       case signUp:
         return MaterialPageRoute(builder: (_) => const SignUpScreen());

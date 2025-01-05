@@ -23,23 +23,19 @@ class ProfileScreen extends ConsumerWidget {
         );
       },
           (success) async {
-        // Prikaz poruke o uspješnom odjavljivanju
         ScaffoldMessenger.of(context).showSnackBar(
           const SnackBar(content: Text("Signed out successfully.")),
         );
-        debugPrint('Current User: ${FirebaseAuth.instance.currentUser}');
 
-        // Umesto addPostFrameCallback koristi SchedulerBinding
-        SchedulerBinding.instance.addPostFrameCallback((_) {
-          if (ModalRoute.of(context)?.isCurrent ?? true) {
-            Navigator.of(context).pushNamedAndRemoveUntil(
-              AppRoute.signIn,
-                  (route) => false, // Uklanja sve prethodne rute
-            );
-          } else {
-            debugPrint('Navigator is locked, skipping navigation.');
-          }
-        });
+        // Navigacija ka SignInScreen
+        if (ModalRoute.of(context)?.isCurrent ?? true) {
+          Navigator.of(context).pushNamedAndRemoveUntil(
+            AppRoute.signIn,
+                (route) => false,
+          );
+        } else {
+          debugPrint('Navigator is locked, skipping navigation.');
+        }
       },
     );
   }
@@ -59,16 +55,14 @@ class ProfileScreen extends ConsumerWidget {
           const SnackBar(content: Text("Account deleted successfully.")),
         );
 
-        await Future.delayed(const Duration(milliseconds: 500));
-
-        // Navigacija u post-frame callback-u
-        WidgetsBinding.instance.addPostFrameCallback((_) {
-          // Obriši sve rute i preusmjeri na ekran za prijavu
-          Navigator.pushReplacementNamed(
-            context,
+        // Navigacija ka SignInScreen
+        await Future.delayed(const Duration(milliseconds: 300));
+        if (ModalRoute.of(context)?.isCurrent ?? true) {
+          Navigator.of(context).pushNamedAndRemoveUntil(
             AppRoute.signIn,
+                (route) => false,
           );
-        });
+        }
       },
     );
   }
