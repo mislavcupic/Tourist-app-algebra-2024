@@ -67,6 +67,23 @@ class UserApi {
 
   }
 
+  // Dohvati trenutnog korisnika s ažuriranim podacima
+  Future<User> getCurrentUser() async {
+    try {
+      User? user = instance.currentUser;
+      if (user == null) {
+        throw Exception('No user signed in');
+      }
+
+      // Pokušaj osvježiti podatke korisnika
+      await user.reload();
+      user = instance.currentUser;
+
+      return user!; // Vrati osvježeni korisnik
+    } catch (e) {
+      throw Exception('Failed to get current user: $e');
+    }
+  }
 
   Future<void> deactivate() async {
     try {

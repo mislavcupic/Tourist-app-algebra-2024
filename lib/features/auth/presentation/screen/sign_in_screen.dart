@@ -144,7 +144,11 @@ class _SignInScreenState extends ConsumerState<SignInScreen> {
                           ),
                           recognizer: TapGestureRecognizer()
                             ..onTap = () {
-                            Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context)=>SignUpScreen()), (route)=>false);
+                              Navigator.pushReplacement(
+                                context,
+                                MaterialPageRoute(builder: (context) => SignUpScreen()),
+                              );
+
                             },
                         ),
                       ],

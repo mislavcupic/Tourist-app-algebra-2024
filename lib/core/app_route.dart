@@ -4,17 +4,19 @@ import 'package:tourist_project_mc/features/auth/presentation/screen/sign_in_scr
 import 'package:tourist_project_mc/features/common/presentation/screen/home_screen.dart';
 import 'package:tourist_project_mc/features/initialisation/presentation/screen/splash_screen.dart';
 import 'package:tourist_project_mc/features/locations/presentation/location_detail/screen/location_detail_screen.dart';
-
 import '../features/auth/presentation/screen/sign_up_screen.dart';
 
 class AppRoute {
   AppRoute._();
+
   static const splash = '/';
   static const signIn = '/signIn';
   static const signUp = '/signUp';
   static const home = '/home';
   static const details = '/details';
   static const verification = '/verification';
+
+
 
   static Route<dynamic> generateRoute(final RouteSettings settings) {
     switch (settings.name) {
