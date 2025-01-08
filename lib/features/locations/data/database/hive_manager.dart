@@ -14,7 +14,7 @@ class HiveDatabaseManager implements DatabaseManager {
   @override
   List<Location> getAllLocations() {
     final locations = Hive.box<Location>(boxName).values.toList();
-    locations.forEach((location) => location.isFavorite = true);
+   // locations.forEach((location) => location.isFavorite = true);
     return locations;
   }
 
